@@ -160,6 +160,11 @@ void PlayScene::Start()
 	m_pStarship->SetTargetPosition(m_pTarget->GetTransform()->position);
 	AddChild(m_pStarship);
 	m_pStarship->SetEnabled(false);
+
+	const SDL_Color Black = { 0, 0, 0, 255 };
+	play_Label = new Label("Press 1 for seek", "Consolas", 40, Black, glm::vec2(400.0f, 120.0f));
+	play_Label->SetParent(this);
+	AddChild(play_Label);
 	
 
 	/* DO NOT REMOVE */
