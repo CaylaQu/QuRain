@@ -162,7 +162,19 @@ void PlayScene::Start()
 	m_pStarship->SetEnabled(false);
 
 	const SDL_Color Black = { 0, 0, 0, 255 };
-	play_Label = new Label("Press 1 for seek", "Consolas", 40, Black, glm::vec2(400.0f, 120.0f));
+	play_Label = new Label("Press 1 for seek |", "Consolas", 20, Black, glm::vec2(160.0f, 560.0f));
+	play_Label->SetParent(this);
+	AddChild(play_Label);
+
+	play_Label = new Label("Press 2 for fleeing |", "Consolas", 20, Black, glm::vec2(400.0f, 560.0f));
+	play_Label->SetParent(this);
+	AddChild(play_Label);
+
+	play_Label = new Label("Press 3 for Arrival", "Consolas", 20, Black, glm::vec2(650.0f, 560.0f));
+	play_Label->SetParent(this);
+	AddChild(play_Label);
+
+	play_Label = new Label("Press 4 for Obstacle avoidance", "Consolas", 20, Black, glm::vec2(400.0f, 590.0f));
 	play_Label->SetParent(this);
 	AddChild(play_Label);
 	
