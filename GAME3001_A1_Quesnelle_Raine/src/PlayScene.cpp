@@ -152,9 +152,11 @@ void PlayScene::Start()
 	// Set Input Type
 	m_pCurrentInputType = static_cast<int>(InputType::KEYBOARD_MOUSE);
 	
-	//Game Objects Lab 2
+	//Game Objects Lab 2 
 	m_pTarget = new Target();
-	AddChild(m_pTarget); 
+	AddChild(m_pTarget);
+	m_pTarget->SetEnabled(false);
+
 
 	m_pStarship = new Starship();
 	m_pStarship->SetTargetPosition(m_pTarget->GetTransform()->position);
@@ -200,10 +202,11 @@ void PlayScene::GUI_Function()
 
 	ImGui::Separator();
 
-	static bool toggle_seek = m_pStarship->IsEnabled();
+	static bool toggle_seek = m_pStarship->IsEnabled() && m_pTarget->IsEnabled();
 	if (ImGui::Checkbox("Toggle Seek", &toggle_seek))
 	{
 		m_pStarship->SetEnabled(toggle_seek);
+		m_pTarget->SetEnabled(toggle_seek);
 	}
 
 	if (ImGui::Button("Reset Seek"))
