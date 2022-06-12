@@ -46,7 +46,7 @@ void StartScene::HandleEvents()
 void StartScene::Start()
 {
 	const SDL_Color blue = { 0, 0, 255, 255 };
-	m_pStartLabel = new Label("START SCENE", "Consolas", 80, blue, glm::vec2(400.0f, 40.0f));
+	m_pStartLabel = new Label("GAME3001", "Consolas", 80, blue, glm::vec2(400.0f, 40.0f));
 	m_pStartLabel->SetParent(this);
 	AddChild(m_pStartLabel);
 
