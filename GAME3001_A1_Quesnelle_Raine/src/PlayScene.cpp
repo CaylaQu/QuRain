@@ -73,11 +73,23 @@ void PlayScene::GetPlayerInput()
 	case static_cast<int>(InputType::KEYBOARD_MOUSE):
 	{
 		// handle player movement with mouse and keyboard
-		if (EventManager::Instance().IsKeyDown(SDL_SCANCODE_A))
+		if (EventManager::Instance().IsKeyDown(SDL_SCANCODE_1))
 		{
-
+			static bool toggle_seek = true;
+			
+			
+				m_pStarship->SetEnabled(toggle_seek);
+				m_pTarget->SetEnabled(toggle_seek);
+			
+		
 		}
-		else if (EventManager::Instance().IsKeyDown(SDL_SCANCODE_D))
+		else if (EventManager::Instance().IsKeyDown(SDL_SCANCODE_2))
+		{
+		}
+		else if (EventManager::Instance().IsKeyDown(SDL_SCANCODE_3))
+		{
+		}
+		else if (EventManager::Instance().IsKeyDown(SDL_SCANCODE_4))
 		{
 		}
 		else
@@ -94,14 +106,26 @@ void PlayScene::GetPlayerInput()
 			{
 				constexpr auto dead_zone = 10000;
 				if (EventManager::Instance().GetGameController(0)->STICK_LEFT_HORIZONTAL > dead_zone
-					|| EventManager::Instance().IsKeyDown(SDL_SCANCODE_D))
+					|| EventManager::Instance().IsKeyDown(SDL_SCANCODE_1))
+				{
+					static bool toggle_seek = m_pStarship->IsEnabled();
+					m_pStarship->SetEnabled(toggle_seek);
+					m_pTarget->SetEnabled(toggle_seek);
+				}
+				else if (EventManager::Instance().GetGameController(0)->STICK_LEFT_HORIZONTAL < -dead_zone
+					|| EventManager::Instance().IsKeyDown(SDL_SCANCODE_2))
 				{
 					
 				}
 				else if (EventManager::Instance().GetGameController(0)->STICK_LEFT_HORIZONTAL < -dead_zone
-					|| EventManager::Instance().IsKeyDown(SDL_SCANCODE_A))
+					|| EventManager::Instance().IsKeyDown(SDL_SCANCODE_3))
 				{
-					
+
+				}
+				else if (EventManager::Instance().GetGameController(0)->STICK_LEFT_HORIZONTAL < -dead_zone
+					|| EventManager::Instance().IsKeyDown(SDL_SCANCODE_4))
+				{
+
 				}
 				else
 				{
@@ -109,13 +133,26 @@ void PlayScene::GetPlayerInput()
 				}
 			}
 		}
-		else if (EventManager::Instance().IsKeyDown(SDL_SCANCODE_A))
+		else if (EventManager::Instance().IsKeyDown(SDL_SCANCODE_1))
+		{
+			
+			static bool toggle_seek = m_pStarship->IsEnabled();
+			m_pStarship->SetEnabled(toggle_seek);
+			m_pTarget->SetEnabled(toggle_seek);
+			
+		
+		}
+		else if (EventManager::Instance().IsKeyDown(SDL_SCANCODE_2))
 		{
 		
 		}
-		else if (EventManager::Instance().IsKeyDown(SDL_SCANCODE_D))
+		else if (EventManager::Instance().IsKeyDown(SDL_SCANCODE_3))
 		{
-		
+
+		}
+		else if (EventManager::Instance().IsKeyDown(SDL_SCANCODE_4))
+		{
+
 		}
 		else
 		{
@@ -133,12 +170,12 @@ void PlayScene::GetKeyboardInput()
 		Game::Instance().Quit();
 	}
 
-	if (EventManager::Instance().IsKeyDown(SDL_SCANCODE_1))
+	if (EventManager::Instance().IsKeyDown(SDL_SCANCODE_S))
 	{
 		Game::Instance().ChangeSceneState(SceneState::START);
 	}
 
-	if (EventManager::Instance().IsKeyDown(SDL_SCANCODE_2))
+	if (EventManager::Instance().IsKeyDown(SDL_SCANCODE_E))
 	{
 		Game::Instance().ChangeSceneState(SceneState::END);
 	}
@@ -158,7 +195,7 @@ void PlayScene::Start()
 	m_pTarget->SetEnabled(false);
 
 
-	m_pStarship = new Starship();
+	m_pStarship = new Starship(); 
 	m_pStarship->SetTargetPosition(m_pTarget->GetTransform()->position);
 	AddChild(m_pStarship);
 	m_pStarship->SetEnabled(false);
@@ -176,7 +213,7 @@ void PlayScene::Start()
 	play_Label->SetParent(this);
 	AddChild(play_Label);
 
-	play_Label = new Label("Press 4 for Obstacle avoidance", "Consolas", 20, Black, glm::vec2(400.0f, 590.0f));
+	play_Label = new Label("Press 4 for Obstacle avoidance", "Consolas", 20, Black, glm::vec2(400.0f, 580.0f));
 	play_Label->SetParent(this);
 	AddChild(play_Label);
 	
@@ -202,28 +239,28 @@ void PlayScene::GUI_Function()
 
 	ImGui::Separator();
 
-	static bool toggle_seek = m_pStarship->IsEnabled() && m_pTarget->IsEnabled();
-	if (ImGui::Checkbox("Toggle Seek", &toggle_seek))
-	{
-		m_pStarship->SetEnabled(toggle_seek);
-		m_pTarget->SetEnabled(toggle_seek);
-	}
+	//static bool toggle_seek = m_pStarship->IsEnabled() && m_pTarget->IsEnabled();
+	//if (ImGui::Checkbox("Toggle Seek", &toggle_seek))
+	//{
+	//	m_pStarship->SetEnabled(toggle_seek);
+	//	m_pTarget->SetEnabled(toggle_seek);
+	//}
 
-	if (ImGui::Button("Reset Seek"))
-	{
-		m_pStarship->Reset();
-		m_pStarship->GetRigidBody()->velocity = glm::vec2(0.0f, 0.0f);
-		m_pStarship->GetRigidBody()->acceleration = glm::vec2(0.0f, 0.0f);
-		m_pStarship->GetRigidBody()->isColliding = false;
-		m_pStarship->SetMaxSpeed(20.0f);
-		m_pStarship->SetTurnRate(5.0f);
-		m_pStarship->SetAccelerationRate(2.0f);
-		m_pStarship->SetCurrentHeading(0.0f);
-		m_pStarship->SetEnabled(false);
+	//if (ImGui::Button("Reset Seek"))
+	//{
+	//	m_pStarship->Reset();
+	//	m_pStarship->GetRigidBody()->velocity = glm::vec2(0.0f, 0.0f);
+	//	m_pStarship->GetRigidBody()->acceleration = glm::vec2(0.0f, 0.0f);
+	//	m_pStarship->GetRigidBody()->isColliding = false;
+	//	m_pStarship->SetMaxSpeed(20.0f);
+	//	m_pStarship->SetTurnRate(5.0f);
+	//	m_pStarship->SetAccelerationRate(2.0f);
+	//	m_pStarship->SetCurrentHeading(0.0f);
+	//	m_pStarship->SetEnabled(false);
 
-		toggle_seek = false;
+	//	toggle_seek = false;
 
-	}
+	//}
 
 	ImGui::Separator();
 

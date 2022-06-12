@@ -3,7 +3,7 @@
 #include "Util.h"
 #include "Game.h"
 
-Starship::Starship(): m_startPos( glm::vec2(400.0f, 400.0f) ),
+Starship::Starship(glm::vec2 Start): 
 	m_maxSpeed(20.0f), m_turnRate(10.0f), m_accelerationRate(4.0f)
 {
 	TextureManager::Instance().Load("../Assets/textures/d7_small.png","Starship");
@@ -16,10 +16,12 @@ Starship::Starship(): m_startPos( glm::vec2(400.0f, 400.0f) ),
 	GetRigidBody()->acceleration = glm::vec2(0, 0);
 	GetRigidBody()->isColliding = false;
 	SetCurrentHeading(0.0f);
-
+	Start = m_startPos; 
 	
 	SetType(GameObjectType::SPACE_SHIP);
 }
+
+
 
 Starship::~Starship()
 = default;
