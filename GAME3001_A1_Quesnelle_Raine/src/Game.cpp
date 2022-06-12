@@ -5,6 +5,7 @@
 #include "glm/gtx/string_cast.hpp"
 #include "Renderer.h"
 #include "EventManager.h"
+#include "TextureManager.h"
 
 
 // Game functions - DO NOT REMOVE ***********************************************

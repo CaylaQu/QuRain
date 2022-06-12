@@ -216,7 +216,7 @@ int CollisionManager::MinSquaredDistanceLineLine(glm::vec2 line1_start, glm::vec
 	return static_cast<int>(Util::Dot(d_p, d_p));
 }
 
-bool CollisionManager::LineAABBCheck(Ship* object1, GameObject* object2)
+bool CollisionManager::LineAABBCheck(Starship2* object1, GameObject* object2)
 {
 	const auto line_start = object1->GetTransform()->position;
 	const auto line_end = object1->GetTransform()->position + object1->GetCurrentDirection() * 100.0f;

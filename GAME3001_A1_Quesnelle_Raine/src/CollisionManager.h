@@ -6,7 +6,7 @@
 #include <iostream>
 
 #include "GameObject.h"
-#include "Ship.h"
+#include "Starship2.h"
 #include <glm/gtx/norm.hpp>
 #include "SoundManager.h"
 
@@ -25,7 +25,7 @@ public:
 
 
 	static int MinSquaredDistanceLineLine(glm::vec2 line1_start, glm::vec2 line1_end, glm::vec2 line2_start, glm::vec2 line2_end);
-	static bool LineAABBCheck(Ship* object1, GameObject* object2);
+	static bool LineAABBCheck(Starship2* object1, GameObject* object2);
 
 	static int CircleAABBSquaredDistance(glm::vec2 circle_centre, int circle_radius, glm::vec2 box_start, int box_width, int box_height);
 	static bool CircleAABBCheck(GameObject* object1, GameObject* object2);

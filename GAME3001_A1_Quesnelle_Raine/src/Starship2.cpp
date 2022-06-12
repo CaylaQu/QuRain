@@ -1,88 +1,88 @@
-#include "Starship.h"
+#include "Starship2.h"
 #include "TextureManager.h"
 #include "Util.h"
 #include "Game.h"
 
-Starship::Starship(): m_startPos( glm::vec2(400.0f, 400.0f) ),
-	m_maxSpeed(20.0f), m_turnRate(10.0f), m_accelerationRate(4.0f)
+Starship2::Starship2() : m_startPos(glm::vec2(400.0f, 400.0f)),
+m_maxSpeed(20.0f), m_turnRate(10.0f), m_accelerationRate(4.0f)
 {
-	TextureManager::Instance().Load("../Assets/textures/d7_small.png","Starship");
+	TextureManager::Instance().Load("../Assets/textures/d7_small.png", "Starship2");
 
-	const auto size = TextureManager::Instance().GetTextureSize("Starship");
+	const auto size = TextureManager::Instance().GetTextureSize("Starship2");
 	SetWidth(static_cast<int>(size.x));
 	SetHeight(static_cast<int>(size.y));
 	GetTransform()->position = m_startPos;
-	GetRigidBody()->velocity = glm::vec2(0 , 0);
+	GetRigidBody()->velocity = glm::vec2(0, 0);
 	GetRigidBody()->acceleration = glm::vec2(0, 0);
 	GetRigidBody()->isColliding = false;
 	SetCurrentHeading(0.0f);
 
-	
+
 	SetType(GameObjectType::SPACE_SHIP1);
 }
 
 
 
-Starship::~Starship()
+Starship2::~Starship2()
 = default;
 
-void Starship::Draw()
+void Starship2::Draw()
 {
 	// draw the target
-	TextureManager::Instance().Draw("Starship", GetTransform()->position, GetCurrentHeading(), 255, true);
+	TextureManager::Instance().Draw("Starship2", GetTransform()->position, GetCurrentHeading(), 255, true);
 }
 
-void Starship::Update()
+void Starship2::Update()
 {
 	Move();
 	CheckBounds();
 }
 
-void Starship::Clean()
+void Starship2::Clean()
 {
 }
 
-float Starship::GetMaxSpeed() const
+float Starship2::GetMaxSpeed() const
 {
 	return m_maxSpeed;
 }
 
-float Starship::GetDesiredVelocity() const
+float Starship2::GetDesiredVelocity() const
 {
 	return m_turnRate;
 }
 
-float Starship::GetAccelerationRate() const
+float Starship2::GetAccelerationRate() const
 {
 	return m_accelerationRate;
 }
 
-float Starship::GetTurnRate() const
+float Starship2::GetTurnRate() const
 {
 	return m_turnRate;
 }
 
-void Starship::SetMaxSpeed(float speed)
+void Starship2::SetMaxSpeed(float speed)
 {
 	m_maxSpeed = speed;
 }
 
-void Starship::SetTurnRate(float angle)
+void Starship2::SetTurnRate(float angle)
 {
 	m_turnRate = angle;
 }
 
-void Starship::SetDesiredVelocity(glm::vec2 target_position)
+void Starship2::SetDesiredVelocity(glm::vec2 target_position)
 {
 	m_desieredVelocity = Util::Normalize(target_position - GetTransform()->position) * m_maxSpeed;
 }
 
-void Starship::SetAccelerationRate(float rate)
+void Starship2::SetAccelerationRate(float rate)
 {
 	m_accelerationRate = rate;
 }
 
-void Starship::Move()
+void Starship2::Move()
 {
 	Seek();
 
@@ -104,9 +104,9 @@ void Starship::Move()
 	GetRigidBody()->velocity = Util::Clamp(GetRigidBody()->velocity, GetMaxSpeed());
 }
 
-void Starship::CheckBounds(){}
+void Starship2::CheckBounds() {}
 
-void Starship::Seek()
+void Starship2::Seek()
 {
 	SetDesiredVelocity(GetTargetPosition());
 
@@ -120,9 +120,9 @@ void Starship::Seek()
 
 }
 
-void Starship::LookWhereIAmGoing(glm::vec2 target_direction)
+void Starship2::LookWhereIAmGoing(glm::vec2 target_direction)
 {
-	const auto target_rotation = Util::SignedAngle(GetCurrentDirection(), target_direction );
+	const auto target_rotation = Util::SignedAngle(GetCurrentDirection(), target_direction);
 
 	if (abs(target_rotation) > m_turnRate)
 	{
@@ -131,7 +131,7 @@ void Starship::LookWhereIAmGoing(glm::vec2 target_direction)
 
 }
 
-void Starship::Reset()
+void Starship2::Reset()
 {
 	GetTransform()->position = m_startPos;
 }
