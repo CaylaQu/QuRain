@@ -3,7 +3,7 @@
 #include "Util.h"
 #include "Game.h"
 
-Starship2::Starship2() : m_startPos(glm::vec2(400.0f, 400.0f)),
+Starship2::Starship2() : m_startPos(glm::vec2(200.0f, 200.0f)),
 m_maxSpeed(20.0f), m_turnRate(10.0f), m_accelerationRate(4.0f)
 {
 	TextureManager::Instance().Load("../Assets/textures/d7_small.png", "Starship2");
@@ -84,7 +84,7 @@ void Starship2::SetAccelerationRate(float rate)
 
 void Starship2::Move()
 {
-	Seek();
+	Flee();
 
 	auto delta_time = Game::Instance().GetDeltaTime();
 
@@ -106,12 +106,12 @@ void Starship2::Move()
 
 void Starship2::CheckBounds() {}
 
-void Starship2::Seek()
+void Starship2::Flee()
 {
 	SetDesiredVelocity(GetTargetPosition());
 
-	const glm::vec2 steering_direction = GetDesiredVelocity() - GetCurrentDirection();
-	auto target_direction = GetTargetPosition() - GetTransform()->position;
+	const glm::vec2 steering_direction = GetDesiredVelocity() + GetCurrentDirection();
+	auto target_direction = GetTargetPosition() + GetTransform()->position;
 	target_direction = Util::Normalize(target_direction);
 
 	LookWhereIAmGoing(target_direction);
