@@ -75,22 +75,31 @@ void PlayScene::GetPlayerInput()
 		// handle player movement with mouse and keyboard
 		if (EventManager::Instance().IsKeyDown(SDL_SCANCODE_1))
 		{
-			static bool toggle_seek = true;
+
 			
-			
-				m_pStarship->SetEnabled(toggle_seek);
-				m_pTarget->SetEnabled(toggle_seek);
+				m_pStarship->SetEnabled(true);
+				m_pTarget->SetEnabled(true);
 			
 		
 		}
 		else if (EventManager::Instance().IsKeyDown(SDL_SCANCODE_2))
 		{
+			m_pStarship2->SetEnabled(true);
+			m_pTarget->SetEnabled(true);
+
 		}
 		else if (EventManager::Instance().IsKeyDown(SDL_SCANCODE_3))
 		{
 		}
 		else if (EventManager::Instance().IsKeyDown(SDL_SCANCODE_4))
 		{
+		}
+		else if (EventManager::Instance().IsKeyDown(SDL_SCANCODE_Q))
+		{
+			m_pStarship->SetEnabled(ClearScreen);
+			m_pStarship2->SetEnabled(ClearScreen);
+			m_pTarget->SetEnabled(ClearScreen);
+			m_pStarship->Reset();
 		}
 		else
 		{
@@ -199,6 +208,11 @@ void PlayScene::Start()
 	m_pStarship->SetTargetPosition(m_pTarget->GetTransform()->position);
 	AddChild(m_pStarship);
 	m_pStarship->SetEnabled(false);
+
+	m_pStarship2 = new Starship2();
+	m_pStarship2->SetTargetPosition(m_pTarget->GetTransform()->position);
+	AddChild(m_pStarship2);
+	m_pStarship2->SetEnabled(false); 
 
 	const SDL_Color Black = { 0, 0, 0, 255 };
 	play_Label = new Label("Press 1 for seek |", "Consolas", 20, Black, glm::vec2(160.0f, 560.0f));

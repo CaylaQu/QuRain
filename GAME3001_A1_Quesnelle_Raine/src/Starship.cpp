@@ -3,7 +3,7 @@
 #include "Util.h"
 #include "Game.h"
 
-Starship::Starship(): m_startPos( glm::vec2(400.0f, 400.0f) ),
+Starship::Starship(): m_startPos( glm::vec2(1000.0f, 400.0f) ),
 	m_maxSpeed(20.0f), m_turnRate(10.0f), m_accelerationRate(4.0f)
 {
 	TextureManager::Instance().Load("../Assets/textures/d7_small.png","Starship");

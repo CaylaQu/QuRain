@@ -26,7 +26,7 @@ public:
 	void SetAccelerationRate(float rate);
 
 	//Others
-	void Seek();
+	void Flee();
 	void LookWhereIAmGoing(glm::vec2 target_direction);
 	void Reset();
 
