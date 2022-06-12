@@ -57,24 +57,14 @@ void PlayScene::GetPlayerInput()
 				constexpr auto dead_zone = 10000;
 				if (EventManager::Instance().GetGameController(0)->STICK_LEFT_HORIZONTAL > dead_zone)
 				{
-					m_pPlayer->SetAnimationState(PlayerAnimationState::PLAYER_RUN_RIGHT);
-					m_playerFacingRight = true;
+
 				}
 				else if (EventManager::Instance().GetGameController(0)->STICK_LEFT_HORIZONTAL < -dead_zone)
 				{
-					m_pPlayer->SetAnimationState(PlayerAnimationState::PLAYER_RUN_LEFT);
-					m_playerFacingRight = false;
+					
 				}
 				else
 				{
-					if (m_playerFacingRight)
-					{
-						m_pPlayer->SetAnimationState(PlayerAnimationState::PLAYER_IDLE_RIGHT);
-					}
-					else
-					{
-						m_pPlayer->SetAnimationState(PlayerAnimationState::PLAYER_IDLE_LEFT);
-					}
 				}
 			}
 		}
@@ -85,24 +75,14 @@ void PlayScene::GetPlayerInput()
 		// handle player movement with mouse and keyboard
 		if (EventManager::Instance().IsKeyDown(SDL_SCANCODE_A))
 		{
-			m_pPlayer->SetAnimationState(PlayerAnimationState::PLAYER_RUN_LEFT);
-			m_playerFacingRight = false;
+
 		}
 		else if (EventManager::Instance().IsKeyDown(SDL_SCANCODE_D))
 		{
-			m_pPlayer->SetAnimationState(PlayerAnimationState::PLAYER_RUN_RIGHT);
-			m_playerFacingRight = true;
 		}
 		else
 		{
-			if (m_playerFacingRight)
-			{
-				m_pPlayer->SetAnimationState(PlayerAnimationState::PLAYER_IDLE_RIGHT);
-			}
-			else
-			{
-				m_pPlayer->SetAnimationState(PlayerAnimationState::PLAYER_IDLE_LEFT);
-			}
+
 		}
 	}
 	break;
@@ -116,48 +96,30 @@ void PlayScene::GetPlayerInput()
 				if (EventManager::Instance().GetGameController(0)->STICK_LEFT_HORIZONTAL > dead_zone
 					|| EventManager::Instance().IsKeyDown(SDL_SCANCODE_D))
 				{
-					m_pPlayer->SetAnimationState(PlayerAnimationState::PLAYER_RUN_RIGHT);
-					m_playerFacingRight = true;
+					
 				}
 				else if (EventManager::Instance().GetGameController(0)->STICK_LEFT_HORIZONTAL < -dead_zone
 					|| EventManager::Instance().IsKeyDown(SDL_SCANCODE_A))
 				{
-					m_pPlayer->SetAnimationState(PlayerAnimationState::PLAYER_RUN_LEFT);
-					m_playerFacingRight = false;
+					
 				}
 				else
 				{
-					if (m_playerFacingRight)
-					{
-						m_pPlayer->SetAnimationState(PlayerAnimationState::PLAYER_IDLE_RIGHT);
-					}
-					else
-					{
-						m_pPlayer->SetAnimationState(PlayerAnimationState::PLAYER_IDLE_LEFT);
-					}
+					
 				}
 			}
 		}
 		else if (EventManager::Instance().IsKeyDown(SDL_SCANCODE_A))
 		{
-			m_pPlayer->SetAnimationState(PlayerAnimationState::PLAYER_RUN_LEFT);
-			m_playerFacingRight = false;
+		
 		}
 		else if (EventManager::Instance().IsKeyDown(SDL_SCANCODE_D))
 		{
-			m_pPlayer->SetAnimationState(PlayerAnimationState::PLAYER_RUN_RIGHT);
-			m_playerFacingRight = true;
+		
 		}
 		else
 		{
-			if (m_playerFacingRight)
-			{
-				m_pPlayer->SetAnimationState(PlayerAnimationState::PLAYER_IDLE_RIGHT);
-			}
-			else
-			{
-				m_pPlayer->SetAnimationState(PlayerAnimationState::PLAYER_IDLE_LEFT);
-			}
+			
 		}
 	}
 	break;
@@ -190,61 +152,15 @@ void PlayScene::Start()
 	// Set Input Type
 	m_pCurrentInputType = static_cast<int>(InputType::KEYBOARD_MOUSE);
 	
-	// Plane Sprite
-	m_pPlaneSprite = new Plane();
-	AddChild(m_pPlaneSprite);
+	//Game Objects Lab 2
+	m_pTarget = new Target();
+	AddChild(m_pTarget); 
 
-	// Player Sprite
-	m_pPlayer = new Player();
-	AddChild(m_pPlayer);
-	m_playerFacingRight = true;
-
-	// Back Button
-	m_pBackButton = new Button("../Assets/textures/backButton.png", "backButton", GameObjectType::BACK_BUTTON);
-	m_pBackButton->GetTransform()->position = glm::vec2(300.0f, 400.0f);
-	m_pBackButton->AddEventListener(Event::CLICK, [&]()-> void
-	{
-		m_pBackButton->SetActive(false);
-		Game::Instance().ChangeSceneState(SceneState::START);
-	});
-
-	m_pBackButton->AddEventListener(Event::MOUSE_OVER, [&]()->void
-	{
-		m_pBackButton->SetAlpha(128);
-	});
-
-	m_pBackButton->AddEventListener(Event::MOUSE_OUT, [&]()->void
-	{
-		m_pBackButton->SetAlpha(255);
-	});
-	AddChild(m_pBackButton);
-
-	// Next Button
-	m_pNextButton = new Button("../Assets/textures/nextButton.png", "nextButton", GameObjectType::NEXT_BUTTON);
-	m_pNextButton->GetTransform()->position = glm::vec2(500.0f, 400.0f);
-	m_pNextButton->AddEventListener(Event::CLICK, [&]()-> void
-	{
-		m_pNextButton->SetActive(false);
-		Game::Instance().ChangeSceneState(SceneState::END);
-	});
-
-	m_pNextButton->AddEventListener(Event::MOUSE_OVER, [&]()->void
-	{
-		m_pNextButton->SetAlpha(128);
-	});
-
-	m_pNextButton->AddEventListener(Event::MOUSE_OUT, [&]()->void
-	{
-		m_pNextButton->SetAlpha(255);
-	});
-
-	AddChild(m_pNextButton);
-
-	/* Instructions Label */
-	m_pInstructionsLabel = new Label("Press the backtick (`) character to toggle Debug View", "Consolas");
-	m_pInstructionsLabel->GetTransform()->position = glm::vec2(Config::SCREEN_WIDTH * 0.5f, 500.0f);
-
-	AddChild(m_pInstructionsLabel);
+	m_pStarship = new Starship();
+	m_pStarship->SetTargetPosition(m_pTarget->GetTransform()->position);
+	AddChild(m_pStarship);
+	m_pStarship->SetEnabled(false);
+	
 
 	/* DO NOT REMOVE */
 	ImGuiWindowFrame::Instance().SetGuiFunction([this] { GUI_Function(); });
@@ -267,21 +183,79 @@ void PlayScene::GUI_Function()
 
 	ImGui::Separator();
 
-	if(ImGui::Button("My Button"))
+	static bool toggle_seek = m_pStarship->IsEnabled();
+	if (ImGui::Checkbox("Toggle Seek", &toggle_seek))
 	{
-		std::cout << "My Button Pressed" << std::endl;
+		m_pStarship->SetEnabled(toggle_seek);
+	}
+
+	if (ImGui::Button("Reset Seek"))
+	{
+		m_pStarship->Reset();
+		m_pStarship->GetRigidBody()->velocity = glm::vec2(0.0f, 0.0f);
+		m_pStarship->GetRigidBody()->acceleration = glm::vec2(0.0f, 0.0f);
+		m_pStarship->GetRigidBody()->isColliding = false;
+		m_pStarship->SetMaxSpeed(20.0f);
+		m_pStarship->SetTurnRate(5.0f);
+		m_pStarship->SetAccelerationRate(2.0f);
+		m_pStarship->SetCurrentHeading(0.0f);
+		m_pStarship->SetEnabled(false);
+
+		toggle_seek = false;
+
 	}
 
 	ImGui::Separator();
 
-	static float float3[3] = { 0.0f, 1.0f, 1.5f };
-	if(ImGui::SliderFloat3("My Slider", float3, 0.0f, 2.0f))
+	float max_speed = m_pStarship->GetMaxSpeed();
+	if (ImGui::SliderFloat("Max Speed", &max_speed, 0.0f, 100.0f))
 	{
-		std::cout << float3[0] << std::endl;
-		std::cout << float3[1] << std::endl;
-		std::cout << float3[2] << std::endl;
-		std::cout << "---------------------------\n";
+		m_pStarship->SetMaxSpeed(max_speed);
 	}
+
+	float max_acc = m_pStarship->GetAccelerationRate();
+	if (ImGui::SliderFloat("Max Acceleration", &max_acc, 0.0f, 100.0f))
+	{
+		m_pStarship->SetAccelerationRate(max_acc);
+	}
+
+	float turn_rate = m_pStarship->GetTurnRate();
+	if (ImGui::SliderFloat("Turn rate", &turn_rate, 0.0f, 100.0f))
+	{
+		m_pStarship->SetTurnRate(turn_rate);
+	}
+
+	ImGui::Separator();
 	
+	static float targetPosition[2] = { m_pTarget->GetTransform()->position.x, m_pTarget->GetTransform()->position.y };
+	if (ImGui::SliderFloat2("Target Position", targetPosition, 0.0f, 800.0f))
+	{
+		m_pTarget->GetTransform()->position.x = targetPosition[0];
+		m_pTarget->GetTransform()->position.y = targetPosition[1];
+	}
+
+	if (ImGui::Button("Reset Target Position"))
+	{
+		m_pTarget->Reset();
+		targetPosition[0] = m_pTarget->GetTransform()->position.x;
+		targetPosition[1] = m_pTarget->GetTransform()->position.y;
+	}
+
+	ImGui::Separator();
+
+	static float shipPosition[2] = { m_pStarship->GetTransform()->position.x, m_pStarship->GetTransform()->position.y };
+	if (ImGui::SliderFloat2("Starship Position", shipPosition, 0.0f, 800.0f))
+	{
+		m_pStarship->GetTransform()->position.x = shipPosition[0];
+		m_pStarship->GetTransform()->position.y = shipPosition[1];
+	}
+
+	if (ImGui::Button("Reset Starship Position"))
+	{
+		m_pStarship->Reset();
+		shipPosition[0] = m_pStarship->GetTransform()->position.x;
+		shipPosition[1] = m_pStarship->GetTransform()->position.y;
+	}
+
 	ImGui::End();
 }

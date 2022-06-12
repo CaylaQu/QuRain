@@ -138,6 +138,9 @@
     <ClCompile Include="..\src\NavigationObject.cpp">
       <Filter>Core</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Starship.cpp">
+      <Filter>Game Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\StartScene.h">
@@ -289,6 +292,9 @@
     </ClInclude>
     <ClInclude Include="..\src\InputType.h">
       <Filter>Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Starship.h">
+      <Filter>Game Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

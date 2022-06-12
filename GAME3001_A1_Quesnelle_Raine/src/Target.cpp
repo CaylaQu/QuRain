@@ -2,15 +2,15 @@
 #include "TextureManager.h"
 
 
-Target::Target()
+Target::Target(): m_startPos( glm::vec2(100.0f, 100.0f) )
 {
 	TextureManager::Instance().Load("../Assets/textures/Circle.png","circle");
 
 	const auto size = TextureManager::Instance().GetTextureSize("circle");
 	SetWidth(static_cast<int>(size.x));
 	SetHeight(static_cast<int>(size.y));
-	GetTransform()->position = glm::vec2(100.0f, 100.0f);
-	GetRigidBody()->velocity = glm::vec2(0, 0);
+	GetTransform()->position = m_startPos;
+	GetRigidBody()->velocity = glm::vec2(0 , 0);
 	GetRigidBody()->isColliding = false;
 
 	SetType(GameObjectType::TARGET);
@@ -46,4 +46,5 @@ void Target::CheckBounds()
 
 void Target::Reset()
 {
+	GetTransform()->position = m_startPos;
 }

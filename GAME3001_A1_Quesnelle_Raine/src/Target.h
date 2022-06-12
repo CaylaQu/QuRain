@@ -14,10 +14,14 @@ public:
 	virtual void Update() override;
 	virtual void Clean() override;
 
+	void Reset();
+
 private:
 	void Move();
 	void CheckBounds();
-	void Reset();
+	
+
+	glm::vec2 m_startPos;
 };
 
 
