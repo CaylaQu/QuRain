@@ -8,7 +8,7 @@ enum class GameObjectType {
 	SPACE_SHIP1,
 	SPACE_SHIP2,
 	SPACE_SHIP3,
-	SPACE_SIP4,
+	SPACE_SHIP4,
 	OBSTACLE,
 	SHIP,
 	TARGET,

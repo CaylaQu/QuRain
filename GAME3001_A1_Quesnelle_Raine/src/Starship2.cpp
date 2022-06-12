@@ -18,7 +18,7 @@ m_maxSpeed(20.0f), m_turnRate(10.0f), m_accelerationRate(4.0f)
 	SetCurrentHeading(0.0f);
 
 
-	SetType(GameObjectType::SPACE_SHIP1);
+	SetType(GameObjectType::SPACE_SHIP2);
 }
 
 
