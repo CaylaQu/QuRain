@@ -101,7 +101,8 @@ void PlayScene::GetPlayerInput()
 		// handle player movement with mouse and keyboard
 		if (EventManager::Instance().IsKeyDown(SDL_SCANCODE_1))
 		{
-
+			SoundManager::Instance().Load("../Assets/audio/Yay.ogg", "yay", SoundType::SOUND_SFX);
+			SoundManager::Instance().PlaySound("yay", 0, -1);
 			
 				m_pStarship->SetEnabled(true);
 				m_pTarget->SetEnabled(true);
@@ -116,6 +117,9 @@ void PlayScene::GetPlayerInput()
 		}
 		else if (EventManager::Instance().IsKeyDown(SDL_SCANCODE_3))
 		{
+			m_pStarship3->SetEnabled(true);
+			m_pTarget->SetEnabled(true);
+
 
 		}
 		else if (EventManager::Instance().IsKeyDown(SDL_SCANCODE_4))
@@ -255,6 +259,11 @@ void PlayScene::Start()
 	m_pStarship2->SetTargetPosition(m_pTarget->GetTransform()->position);
 	AddChild(m_pStarship2);
 	m_pStarship2->SetEnabled(false);
+
+	m_pStarship3 = new Starship3(); 
+	m_pStarship3->SetTargetPosition(m_pTarget->GetTransform()->position);
+	AddChild(m_pStarship3);
+	m_pStarship3->SetEnabled(false);
 
 	m_pStarship4 = new Starship4();
 	m_pStarship4->SetTargetPosition(m_pTarget->GetTransform()->position);
