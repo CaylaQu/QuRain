@@ -6,7 +6,8 @@
 #include "Target.h"
 #include "Starship.h"
 #include "Label.h"
-#include "Starship2.h" 
+#include "Starship2.h"
+#include "Obstacle.h"
 
 
 class PlayScene : public Scene
@@ -32,6 +33,7 @@ private:
 	Starship* m_pStarship;
 	Starship2* m_pStarship2;
 	Label* play_Label;
+	Obstacle* m_pObstacle; 
 
 	// Input Control
 	int m_pCurrentInputType{};

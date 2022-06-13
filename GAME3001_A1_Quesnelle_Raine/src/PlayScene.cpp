@@ -93,12 +93,16 @@ void PlayScene::GetPlayerInput()
 		}
 		else if (EventManager::Instance().IsKeyDown(SDL_SCANCODE_4))
 		{
+			m_pObstacle->SetEnabled(true);
+
 		}
 		else if (EventManager::Instance().IsKeyDown(SDL_SCANCODE_Q))
 		{
 			m_pStarship->SetEnabled(ClearScreen);
 			m_pStarship2->SetEnabled(ClearScreen);
 			m_pTarget->SetEnabled(ClearScreen);
+			m_pObstacle->SetEnabled(ClearScreen);
+
 			m_pStarship->Reset();
 		}
 		else
@@ -202,6 +206,10 @@ void PlayScene::Start()
 	m_pTarget = new Target();
 	AddChild(m_pTarget);
 	m_pTarget->SetEnabled(false);
+
+	m_pObstacle = new Obstacle();
+	AddChild(m_pObstacle);
+	m_pObstacle->SetEnabled(false);
 
 
 	m_pStarship = new Starship(); 
