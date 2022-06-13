@@ -21,11 +21,35 @@ void PlayScene::Draw()
 {
 	DrawDisplayList();
 	SDL_SetRenderDrawColor(Renderer::Instance().GetRenderer(), 255, 255, 255, 255);
+
+	if (m_pStarship4->IsEnabled())
+	{
+		Util::DrawLine(m_pStarship4->GetTransform()->position, m_pStarship4->GetLeftLOSEndPoint(),
+			m_pStarship4->GetLineColour(0));
+		Util::DrawLine(m_pStarship4->GetTransform()->position, m_pStarship4->GetMiddleLOSEndPoint(),
+			m_pStarship4->GetLineColour(1));
+		Util::DrawLine(m_pStarship4->GetTransform()->position, m_pStarship4->GetRightLOSEndPoint(),
+			m_pStarship4->GetLineColour(2));
+		Util::DrawLine(m_pStarship4->GetTransform()->position, m_pStarship4->Get2LeftLOSEndPoint(),
+			m_pStarship4->GetLineColour(3));
+		Util::DrawLine(m_pStarship4->GetTransform()->position, m_pStarship4->Get2RightLOSEndPoint(),
+			m_pStarship4->GetLineColour(4));
+
+	}
 }
 
 void PlayScene::Update()
 {
 	UpdateDisplayList();
+	if (m_pStarship4->IsEnabled())
+	{
+		CollisionManager::AABBCheck(m_pObstacle, m_pStarship4);
+		if (!m_pStarship4->GetRigidBody()->isColliding) {
+			CollisionManager::CircleAABBCheck(m_pTarget, m_pStarship4);
+
+		}
+		DoWiskerCollision();
+	}
 }
 
 void PlayScene::Clean()
@@ -90,10 +114,13 @@ void PlayScene::GetPlayerInput()
 		}
 		else if (EventManager::Instance().IsKeyDown(SDL_SCANCODE_3))
 		{
+
 		}
 		else if (EventManager::Instance().IsKeyDown(SDL_SCANCODE_4))
 		{
 			m_pObstacle->SetEnabled(true);
+			m_pStarship4->SetEnabled(true);
+			m_pTarget->SetEnabled(true);
 
 		}
 		else if (EventManager::Instance().IsKeyDown(SDL_SCANCODE_Q))
@@ -102,6 +129,7 @@ void PlayScene::GetPlayerInput()
 			m_pStarship2->SetEnabled(ClearScreen);
 			m_pTarget->SetEnabled(ClearScreen);
 			m_pObstacle->SetEnabled(ClearScreen);
+			m_pStarship4->SetEnabled(ClearScreen);
 
 			m_pStarship->Reset();
 		}
@@ -220,7 +248,12 @@ void PlayScene::Start()
 	m_pStarship2 = new Starship2();
 	m_pStarship2->SetTargetPosition(m_pTarget->GetTransform()->position);
 	AddChild(m_pStarship2);
-	m_pStarship2->SetEnabled(false); 
+	m_pStarship2->SetEnabled(false);
+
+	m_pStarship4 = new Starship4();
+	m_pStarship4->SetTargetPosition(m_pTarget->GetTransform()->position);
+	AddChild(m_pStarship4);
+	m_pStarship4->SetEnabled(false);
 
 	const SDL_Color Black = { 0, 0, 0, 255 };
 	play_Label = new Label("Press 1 for seek |", "Consolas", 20, Black, glm::vec2(160.0f, 560.0f));
@@ -235,7 +268,11 @@ void PlayScene::Start()
 	play_Label->SetParent(this);
 	AddChild(play_Label);
 
-	play_Label = new Label("Press 4 for Obstacle avoidance", "Consolas", 20, Black, glm::vec2(400.0f, 580.0f));
+	play_Label = new Label("Press 4 for Obstacle avoidance |", "Consolas", 20, Black, glm::vec2(250.0f, 585.0f));
+	play_Label->SetParent(this);
+	AddChild(play_Label);
+
+	play_Label = new Label("Press q to clear the screen", "Consolas", 20, Black, glm::vec2(590.0f, 585.0f));
 	play_Label->SetParent(this);
 	AddChild(play_Label);
 	
@@ -337,4 +374,52 @@ void PlayScene::GUI_Function()
 	}
 
 	ImGui::End();
+}
+
+void PlayScene::DoWiskerCollision()
+{
+	SDL_Rect box = { (int)(m_pObstacle->GetTransform()->position.x - m_pObstacle->GetWidth() * 0.5f),
+					(int)(m_pObstacle->GetTransform()->position.y - m_pObstacle->GetWidth() * 0.5f),
+					(int)m_pObstacle->GetWidth()	,(int)m_pObstacle->GetHeight() };
+
+	SDL_Point ship_origin = { (int)m_pStarship4->GetTransform()->position.x,
+							(int)m_pStarship4->GetTransform()->position.y };
+
+	SDL_Point Left = { (int)m_pStarship4->GetLeftLOSEndPoint().x,
+						(int)m_pStarship4->GetLeftLOSEndPoint().y };
+
+	SDL_Point SecondLeft = { (int)m_pStarship4->Get2LeftLOSEndPoint().x,
+						(int)m_pStarship4->Get2LeftLOSEndPoint().y };
+
+	SDL_Point Middle = { (int)m_pStarship4->GetMiddleLOSEndPoint().x,
+					(int)m_pStarship4->GetMiddleLOSEndPoint().y };
+
+	SDL_Point SecondRight = { (int)m_pStarship4->Get2RightLOSEndPoint().x ,
+					(int)m_pStarship4->Get2RightLOSEndPoint().y };
+
+	SDL_Point Right = { (int)m_pStarship4->GetRightLOSEndPoint().x ,
+					(int)m_pStarship4->GetRightLOSEndPoint().y };
+
+	bool collisions[5] = { 0,0,0,0,0 };
+
+	SDL_Point ship = ship_origin;
+	collisions[0] = SDL_IntersectRectAndLine(&box, &ship.x, &ship.y, &Left.x, &Left.y);
+
+	collisions[1] = SDL_IntersectRectAndLine(&box, &ship.x, &ship.y, &SecondLeft.x, &SecondLeft.y);
+
+	ship = ship_origin;
+	collisions[2] = SDL_IntersectRectAndLine(&box, &ship.x, &ship.y, &Middle.x, &Middle.y);
+
+	ship = ship_origin;
+	collisions[3] = SDL_IntersectRectAndLine(&box, &ship.x, &ship.y, &SecondRight.x, &SecondRight.y);
+
+	ship = ship_origin;
+	collisions[4] = SDL_IntersectRectAndLine(&box, &ship.x, &ship.y, &Right.x, &Right.y);
+
+	for (unsigned i = 0; i < 5; i++)
+	{
+		m_pStarship4->GetCollisionWiskers()[i] = collisions[i];
+		m_pStarship4->SetLineColour(i, (collisions[i] ? glm::vec4(1, 0, 0, 1) : glm::vec4(0, 1, 0, 1)));
+	}
+
 }

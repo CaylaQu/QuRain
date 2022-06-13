@@ -7,6 +7,7 @@
 #include "Starship.h"
 #include "Label.h"
 #include "Starship2.h"
+#include "Starship4.h"
 #include "Obstacle.h"
 
 
@@ -32,6 +33,7 @@ private:
 	Target* m_pTarget;
 	Starship* m_pStarship;
 	Starship2* m_pStarship2;
+	Starship4* m_pStarship4;
 	Label* play_Label;
 	Obstacle* m_pObstacle; 
 
@@ -39,6 +41,8 @@ private:
 	int m_pCurrentInputType{};
 	void GetPlayerInput();
 	void GetKeyboardInput();
+
+	void DoWiskerCollision();
 };
 
 #endif /* defined (__PLAY_SCENE__) */

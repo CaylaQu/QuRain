@@ -84,7 +84,7 @@ void Starship4::SetAccelerationRate(float rate)
 	m_accelerationRate = rate;
 }
 
-void Starship4::Seek()
+void Starship4::Seek() //obstacle avoidance seek 
 {
 	SetDesiredVelocity(GetTargetPosition());
 
