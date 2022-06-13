@@ -32,10 +32,10 @@ void PlayScene::Draw()
 			m_pStarship4->GetLineColour(1));
 		Util::DrawLine(m_pStarship4->GetTransform()->position, m_pStarship4->GetRightLOSEndPoint(),
 			m_pStarship4->GetLineColour(2));
-		Util::DrawLine(m_pStarship4->GetTransform()->position, m_pStarship4->Get2LeftLOSEndPoint(),
+	/*	Util::DrawLine(m_pStarship4->GetTransform()->position, m_pStarship4->Get2LeftLOSEndPoint(),
 			m_pStarship4->GetLineColour(3));
 		Util::DrawLine(m_pStarship4->GetTransform()->position, m_pStarship4->Get2RightLOSEndPoint(),
-			m_pStarship4->GetLineColour(4));
+			m_pStarship4->GetLineColour(4));*/
 
 	}
 }
@@ -228,7 +228,7 @@ void PlayScene::Start()
 {
 	// Set GUI Title
 	SoundManager::Instance().Load("../Assets/audio/Yoshi'sIsland.mp3", "yoshi", SoundType::SOUND_MUSIC);
-	SoundManager::Instance().SetMusicVolume(100), 
+	SoundManager::Instance().SetMusicVolume(30), 
 	SoundManager::Instance().PlayMusic("yoshi", -1, 0);
 
 	m_guiTitle = "Play Scene";
@@ -384,8 +384,8 @@ void PlayScene::GUI_Function()
 
 void PlayScene::DoWiskerCollision()
 {
-	SDL_Rect box = { (int)(m_pObstacle->GetTransform()->position.x - m_pObstacle->GetWidth() * 0.5f),
-					(int)(m_pObstacle->GetTransform()->position.y - m_pObstacle->GetWidth() * 0.5f),
+	SDL_Rect box = { (int)(m_pObstacle->GetTransform()->position.x - m_pObstacle->GetWidth() * 0.10f),
+					(int)(m_pObstacle->GetTransform()->position.y - m_pObstacle->GetWidth() * 0.10f),
 					(int)m_pObstacle->GetWidth()	,(int)m_pObstacle->GetHeight() };
 
 	SDL_Point ship_origin = { (int)m_pStarship4->GetTransform()->position.x,
@@ -394,35 +394,36 @@ void PlayScene::DoWiskerCollision()
 	SDL_Point Left = { (int)m_pStarship4->GetLeftLOSEndPoint().x,
 						(int)m_pStarship4->GetLeftLOSEndPoint().y };
 
-	SDL_Point SecondLeft = { (int)m_pStarship4->Get2LeftLOSEndPoint().x,
-						(int)m_pStarship4->Get2LeftLOSEndPoint().y };
+	//SDL_Point SecondLeft = { (int)m_pStarship4->Get2LeftLOSEndPoint().x,
+	//					(int)m_pStarship4->Get2LeftLOSEndPoint().y };
 
 	SDL_Point Middle = { (int)m_pStarship4->GetMiddleLOSEndPoint().x,
 					(int)m_pStarship4->GetMiddleLOSEndPoint().y };
 
-	SDL_Point SecondRight = { (int)m_pStarship4->Get2RightLOSEndPoint().x ,
-					(int)m_pStarship4->Get2RightLOSEndPoint().y };
+	/*SDL_Point SecondRight = { (int)m_pStarship4->Get2RightLOSEndPoint().x ,
+					(int)m_pStarship4->Get2RightLOSEndPoint().y };*/
 
 	SDL_Point Right = { (int)m_pStarship4->GetRightLOSEndPoint().x ,
 					(int)m_pStarship4->GetRightLOSEndPoint().y };
 
-	bool collisions[5] = { 0,0,0,0,0 };
+	bool collisions[3] = { 0,0,0 };
 
 	SDL_Point ship = ship_origin;
 	collisions[0] = SDL_IntersectRectAndLine(&box, &ship.x, &ship.y, &Left.x, &Left.y);
 
-	collisions[1] = SDL_IntersectRectAndLine(&box, &ship.x, &ship.y, &SecondLeft.x, &SecondLeft.y);
+	//ship = ship_origin;
+	//collisions[1] = SDL_IntersectRectAndLine(&box, &ship.x, &ship.y, &SecondLeft.x, &SecondLeft.y);
 
 	ship = ship_origin;
-	collisions[2] = SDL_IntersectRectAndLine(&box, &ship.x, &ship.y, &Middle.x, &Middle.y);
+	collisions[1] = SDL_IntersectRectAndLine(&box, &ship.x, &ship.y, &Middle.x, &Middle.y);
+
+	//ship = ship_origin;
+	//collisions[3] = SDL_IntersectRectAndLine(&box, &ship.x, &ship.y, &SecondRight.x, &SecondRight.y);
 
 	ship = ship_origin;
-	collisions[3] = SDL_IntersectRectAndLine(&box, &ship.x, &ship.y, &SecondRight.x, &SecondRight.y);
+	collisions[2] = SDL_IntersectRectAndLine(&box, &ship.x, &ship.y, &Right.x, &Right.y);
 
-	ship = ship_origin;
-	collisions[4] = SDL_IntersectRectAndLine(&box, &ship.x, &ship.y, &Right.x, &Right.y);
-
-	for (unsigned i = 0; i < 5; i++)
+	for (unsigned i = 0; i < 3; i++)
 	{
 		m_pStarship4->GetCollisionWiskers()[i] = collisions[i];
 		m_pStarship4->SetLineColour(i, (collisions[i] ? glm::vec4(1, 0, 0, 1) : glm::vec4(0, 1, 0, 1)));
