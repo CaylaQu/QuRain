@@ -2,6 +2,8 @@
 #include "Game.h"
 #include "EventManager.h"
 #include "InputType.h"
+#include "SoundManager.h"
+
 
 // required for IMGUI
 #include "imgui.h"
@@ -225,6 +227,10 @@ void PlayScene::GetKeyboardInput()
 void PlayScene::Start()
 {
 	// Set GUI Title
+	SoundManager::Instance().Load("../Assets/audio/Yoshi'sIsland.mp3", "yoshi", SoundType::SOUND_MUSIC);
+	SoundManager::Instance().SetMusicVolume(100), 
+	SoundManager::Instance().PlayMusic("yoshi", -1, 0);
+
 	m_guiTitle = "Play Scene";
 
 	// Set Input Type

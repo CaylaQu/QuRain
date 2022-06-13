@@ -9,7 +9,8 @@
 #include "Starship2.h"
 #include "Starship4.h"
 #include "Obstacle.h"
-
+#include "SoundManager.h"
+ 
 
 class PlayScene : public Scene
 {
