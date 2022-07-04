@@ -102,6 +102,8 @@ void PlayScene::GetPlayerInput()
 		if (EventManager::Instance().IsKeyDown(SDL_SCANCODE_1))
 		{
 			SoundManager::Instance().Load("../Assets/audio/Yay.ogg", "yay", SoundType::SOUND_SFX);
+			SoundManager::Instance().SetSoundVolume(20);
+
 			SoundManager::Instance().PlaySound("yay", 0, -1);
 			
 				m_pStarship->SetEnabled(true);
@@ -111,12 +113,18 @@ void PlayScene::GetPlayerInput()
 		}
 		else if (EventManager::Instance().IsKeyDown(SDL_SCANCODE_2))
 		{
+			SoundManager::Instance().Load("../Assets/audio/saucisse.mp3", "saucisse", SoundType::SOUND_SFX);
+			SoundManager::Instance().SetSoundVolume(20);
+			SoundManager::Instance().PlaySound("saucisse", 0, -1);
 			m_pStarship2->SetEnabled(true);
 			m_pTarget->SetEnabled(true);
 
 		}
 		else if (EventManager::Instance().IsKeyDown(SDL_SCANCODE_3))
 		{
+			SoundManager::Instance().Load("../Assets/audio/thunder.ogg", "thunder", SoundType::SOUND_SFX);
+			SoundManager::Instance().SetSoundVolume(20);
+			SoundManager::Instance().PlaySound("thunder", 0, -1);
 			m_pStarship3->SetEnabled(true);
 			m_pTarget->SetEnabled(true);
 
@@ -124,6 +132,10 @@ void PlayScene::GetPlayerInput()
 		}
 		else if (EventManager::Instance().IsKeyDown(SDL_SCANCODE_4))
 		{
+			SoundManager::Instance().Load("../Assets/audio/torpedo.ogg", "tor", SoundType::SOUND_SFX);
+			SoundManager::Instance().SetSoundVolume(20);
+
+			SoundManager::Instance().PlaySound("tor", 0, -1);
 			m_pObstacle->SetEnabled(true);
 			m_pStarship4->SetEnabled(true);
 			m_pTarget->SetEnabled(true);
@@ -131,8 +143,11 @@ void PlayScene::GetPlayerInput()
 		}
 		else if (EventManager::Instance().IsKeyDown(SDL_SCANCODE_Q))
 		{
+			SoundManager::Instance().Load("../Assets/audio/comedicBoing.wav", "boing", SoundType::SOUND_SFX);
+			SoundManager::Instance().PlaySound("boing", 0, -1);
 			m_pStarship->SetEnabled(ClearScreen);
 			m_pStarship2->SetEnabled(ClearScreen);
+			m_pStarship3->SetEnabled(ClearScreen);
 			m_pTarget->SetEnabled(ClearScreen);
 			m_pObstacle->SetEnabled(ClearScreen);
 			m_pStarship4->SetEnabled(ClearScreen);
