@@ -1,0 +1,23 @@
+﻿  Bullet.cpp
+C:\Users\kiera\Desktop\LE2_LastnameFirstname\GAME1017_EmptyEngine\Bullet.h(5,10): fatal error C1083: Cannot open include file: 'SDL.h': No such file or directory
+  CollisionManager.cpp
+C:\Users\kiera\Desktop\LE2_LastnameFirstname\GAME1017_EmptyEngine\CollisionManager.h(6,10): fatal error C1083: Cannot open include file: 'SDL.h': No such file or directory
+  Enemy.cpp
+C:\Users\kiera\Desktop\LE2_LastnameFirstname\GAME1017_EmptyEngine\Enemy.h(5,10): fatal error C1083: Cannot open include file: 'SDL.h': No such file or directory
+  Engine.cpp
+C:\Users\kiera\Desktop\LE2_LastnameFirstname\GAME1017_EmptyEngine\Engine.h(8,10): fatal error C1083: Cannot open include file: 'SDL.h': No such file or directory
+  EventManager.cpp
+C:\Users\kiera\Desktop\LE2_LastnameFirstname\GAME1017_EmptyEngine\EventManager.h(5,10): fatal error C1083: Cannot open include file: 'SDL.h': No such file or directory
+  Main.cpp
+C:\Users\kiera\Desktop\LE2_LastnameFirstname\GAME1017_EmptyEngine\Main.cpp(10,10): fatal error C1083: Cannot open include file: 'SDL.h': No such file or directory
+  MathManager.cpp
+C:\Users\kiera\Desktop\LE2_LastnameFirstname\GAME1017_EmptyEngine\MathManager.h(7,10): fatal error C1083: Cannot open include file: 'SDL.h': No such file or directory
+  StateManager.cpp
+C:\Users\kiera\Desktop\LE2_LastnameFirstname\GAME1017_EmptyEngine\Turret.h(5,10): fatal error C1083: Cannot open include file: 'SDL.h': No such file or directory
+  States.cpp
+C:\Users\kiera\Desktop\LE2_LastnameFirstname\GAME1017_EmptyEngine\Turret.h(5,10): fatal error C1083: Cannot open include file: 'SDL.h': No such file or directory
+  TextureManager.cpp
+C:\Users\kiera\Desktop\LE2_LastnameFirstname\GAME1017_EmptyEngine\TextureManager.h(7,10): fatal error C1083: Cannot open include file: 'SDL.h': No such file or directory
+  Turret.cpp
+C:\Users\kiera\Desktop\LE2_LastnameFirstname\GAME1017_EmptyEngine\Turret.h(5,10): fatal error C1083: Cannot open include file: 'SDL.h': No such file or directory
+  Generating Code...

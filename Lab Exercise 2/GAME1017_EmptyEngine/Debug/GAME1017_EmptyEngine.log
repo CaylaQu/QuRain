@@ -1,0 +1,10 @@
+﻿  Engine.cpp
+  StateManager.cpp
+  States.cpp
+  Turret.cpp
+C:\Users\kiera\Desktop\GF-Labs\Lab Exercise 2\GAME1017_EmptyEngine\Turret.cpp(49,37): warning C4838: conversion from 'int' to 'float' requires a narrowing conversion
+C:\Users\kiera\Desktop\GF-Labs\Lab Exercise 2\GAME1017_EmptyEngine\Turret.cpp(49,37): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\kiera\Desktop\GF-Labs\Lab Exercise 2\GAME1017_EmptyEngine\Turret.cpp(49,64): warning C4838: conversion from 'int' to 'float' requires a narrowing conversion
+C:\Users\kiera\Desktop\GF-Labs\Lab Exercise 2\GAME1017_EmptyEngine\Turret.cpp(49,64): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+  Generating Code...
+  GAME1017_EmptyEngine.vcxproj -> C:\Users\kiera\Desktop\GF-Labs\Lab Exercise 2\Debug\GAME1017_EmptyEngine.exe
