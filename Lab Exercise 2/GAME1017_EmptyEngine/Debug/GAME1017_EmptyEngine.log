@@ -1,10 +1,21 @@
-﻿  Engine.cpp
+﻿  Bullet.cpp
+C:\Users\cayla\Desktop\QuRain\Lab Exercise 2\GAME1017_EmptyEngine\Bullet.cpp(8,13): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\cayla\Desktop\QuRain\Lab Exercise 2\GAME1017_EmptyEngine\Bullet.cpp(9,13): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+  CollisionManager.cpp
+  Enemy.cpp
+  Engine.cpp
+  EventManager.cpp
+  Main.cpp
+  MathManager.cpp
+C:\Users\cayla\Desktop\QuRain\Lab Exercise 2\GAME1017_EmptyEngine\MathManager.cpp(22,16): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
   StateManager.cpp
   States.cpp
+  TextureManager.cpp
+  tinyxml2.cpp
   Turret.cpp
-C:\Users\kiera\Desktop\GF-Labs\Lab Exercise 2\GAME1017_EmptyEngine\Turret.cpp(49,37): warning C4838: conversion from 'int' to 'float' requires a narrowing conversion
-C:\Users\kiera\Desktop\GF-Labs\Lab Exercise 2\GAME1017_EmptyEngine\Turret.cpp(49,37): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\kiera\Desktop\GF-Labs\Lab Exercise 2\GAME1017_EmptyEngine\Turret.cpp(49,64): warning C4838: conversion from 'int' to 'float' requires a narrowing conversion
-C:\Users\kiera\Desktop\GF-Labs\Lab Exercise 2\GAME1017_EmptyEngine\Turret.cpp(49,64): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\cayla\Desktop\QuRain\Lab Exercise 2\GAME1017_EmptyEngine\Turret.cpp(49,37): warning C4838: conversion from 'int' to 'float' requires a narrowing conversion
+C:\Users\cayla\Desktop\QuRain\Lab Exercise 2\GAME1017_EmptyEngine\Turret.cpp(49,37): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\cayla\Desktop\QuRain\Lab Exercise 2\GAME1017_EmptyEngine\Turret.cpp(49,64): warning C4838: conversion from 'int' to 'float' requires a narrowing conversion
+C:\Users\cayla\Desktop\QuRain\Lab Exercise 2\GAME1017_EmptyEngine\Turret.cpp(49,64): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
   Generating Code...
-  GAME1017_EmptyEngine.vcxproj -> C:\Users\kiera\Desktop\GF-Labs\Lab Exercise 2\Debug\GAME1017_EmptyEngine.exe
+  GAME1017_EmptyEngine.vcxproj -> C:\Users\cayla\Desktop\QuRain\Lab Exercise 2\Debug\GAME1017_EmptyEngine.exe
