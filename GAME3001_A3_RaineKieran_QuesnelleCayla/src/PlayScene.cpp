@@ -355,15 +355,12 @@ void PlayScene::Start()
 	m_pStarship->GetTransform()->position = glm::vec2(150.0f, 300.0f);
 	AddChild(m_pStarship, 2);
 
-	//// Add Obstacles
-	//BuildObstaclePool();
+	//Add Obstacles
+	BuildObstaclePool();
 
 	m_pBaseEnemy = new BaseEnemy();
 	m_pBaseEnemy->GetTransform()->position = glm::vec2(550.0f, 400.0f);
 	AddChild(m_pBaseEnemy, 2);
-
-	// Add Obstacles
-	BuildObstaclePool();
 
 
 	// setup the grid
