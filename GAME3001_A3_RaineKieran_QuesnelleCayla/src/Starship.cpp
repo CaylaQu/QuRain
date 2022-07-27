@@ -6,7 +6,7 @@
 Starship::Starship() : m_maxSpeed(20.0f),
 	m_turnRate(5.0f), m_accelerationRate(2.0f), m_startPos( glm::vec2(300.0f, 500.0f) )
 {
-	TextureManager::Instance().Load("../Assets/textures/ncl_small.png","starship");
+	TextureManager::Instance().Load("../Assets/textures/greencar.png","starship");
 
 	const auto size = TextureManager::Instance().GetTextureSize("starship");
 	SetWidth(static_cast<int>(size.x));

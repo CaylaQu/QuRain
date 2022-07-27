@@ -338,6 +338,11 @@ void PlayScene::Start()
 	m_pathNodeLOSDistance = 1000; // 1000x distance
 	m_setPathNodeLOSDistance(m_pathNodeLOSDistance);
 
+	m_pLevel = new TiledLevel("../Assets/data/level.txt", "../Assets/data/leveldata.txt",
+		"../Assets/textures/tilefloor.png", "tiles", { 32,32 }, { 40.0f,40.0f },
+		15, 20, true, true);
+	AddChild(m_pLevel);
+
 	// Set Input Type
 	m_pCurrentInputType = static_cast<int>(InputType::KEYBOARD_MOUSE);
 
@@ -350,8 +355,8 @@ void PlayScene::Start()
 	m_pStarship->GetTransform()->position = glm::vec2(150.0f, 300.0f);
 	AddChild(m_pStarship, 2);
 
-	// Add Obstacles
-	BuildObstaclePool();
+	//// Add Obstacles
+	//BuildObstaclePool();
 
 	// setup the grid
 	m_isGridEnabled = false;

@@ -14,6 +14,10 @@ PathNode::PathNode()
 	SetLOSColour(glm::vec4(0, 0.5, 1, 1));
 }
 
+PathNode::PathNode(Tile* tile)
+{
+}
+
 PathNode::~PathNode()
 = default;
 
@@ -28,4 +32,19 @@ void PathNode::Update()
 
 void PathNode::Clean()
 {
+}
+
+std::vector<PathConnection*>& PathNode::GetConnections()
+{
+	return m_connections;
+}
+
+void PathNode::AddConnection(PathConnection* c)
+{
+	m_connections.push_back(c);
+}
+
+Tile* PathNode::GetTile() const
+{
+	return m_tile;
 }
