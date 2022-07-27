@@ -299,7 +299,7 @@ void PlayScene::m_checkAllNNodesWithBoth()
 {
 	for (auto path_node : m_pGrid)
 	{
-		bool LOSWidthStarShip = m_checkPathNodesLOS(path_node, m_pStarship);
+		bool LOSWidthStarShip = m_checkPathNodesLOS(path_node, m_pBaseEnemy);
 		bool LOSWidthTarget = m_checkPathNodesLOS(path_node, m_pTarget);
 		path_node->SetHasLOS(LOSWidthStarShip && LOSWidthTarget, glm::vec4(0, 1, 1, 1));
 	}
@@ -356,7 +356,7 @@ void PlayScene::Start()
 	AddChild(m_pStarship, 2);
 
 	//Add Obstacles
-	//BuildObstaclePool();
+	BuildObstaclePool();
 
 	m_pBaseEnemy = new BaseEnemy();
 	m_pBaseEnemy->GetTransform()->position = glm::vec2(550.0f, 400.0f);
@@ -407,7 +407,7 @@ void PlayScene::GUI_Function()
 
 	ImGui::Text("Path Node LOS");
 	ImGui::RadioButton("Target", &static_cast<int>(m_LOSMode), static_cast<int>(LOSMode::TARGET)); ImGui::SameLine();
-	ImGui::RadioButton("Starship", &static_cast<int>(m_LOSMode),static_cast<int>(LOSMode::BASEENEMY)); ImGui::SameLine();
+	ImGui::RadioButton("Enemy", &static_cast<int>(m_LOSMode),static_cast<int>(LOSMode::BASEENEMY)); ImGui::SameLine();
 	ImGui::RadioButton("Both1", &static_cast<int>(m_LOSMode), static_cast<int>(LOSMode::BOTH));
 
 
