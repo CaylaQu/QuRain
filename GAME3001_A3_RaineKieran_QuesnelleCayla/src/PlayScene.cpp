@@ -356,7 +356,7 @@ void PlayScene::Start()
 	AddChild(m_pStarship, 2);
 
 	//Add Obstacles
-	//BuildObstaclePool();
+	BuildObstaclePool();
 
 	m_pBaseEnemy = new BaseEnemy();
 	m_pBaseEnemy->GetTransform()->position = glm::vec2(550.0f, 400.0f);
