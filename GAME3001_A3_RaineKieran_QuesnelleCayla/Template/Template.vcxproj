@@ -156,6 +156,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\A.I\GAME3001_Labs\Lab 5\src\PathManager.cpp" />
     <ClCompile Include="..\include\IMGUI\imgui.cpp" />
     <ClCompile Include="..\include\IMGUI\imgui_demo.cpp" />
     <ClCompile Include="..\include\IMGUI\imgui_draw.cpp" />
@@ -173,6 +174,8 @@
     <ClCompile Include="..\src\PathNode.cpp" />
     <ClCompile Include="..\src\Sprite.cpp" />
     <ClCompile Include="..\src\Starship.cpp" />
+    <ClCompile Include="..\src\Tile.cpp" />
+    <ClCompile Include="..\src\TiledLevel.cpp" />
     <ClCompile Include="..\src\UIControl.cpp" />
     <ClCompile Include="..\src\DisplayObject.cpp" />
     <ClCompile Include="..\src\EndScene.cpp" />
@@ -197,6 +200,7 @@
     <ClCompile Include="..\src\Util.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\A.I\GAME3001_Labs\Lab 5\src\PathManager.h" />
     <ClInclude Include="..\include\IMGUI\imconfig.h" />
     <ClInclude Include="..\include\IMGUI\imgui.h" />
     <ClInclude Include="..\include\IMGUI\imgui_internal.h" />
@@ -223,6 +227,8 @@
     <ClInclude Include="..\src\SoundType.h" />
     <ClInclude Include="..\src\Sprite.h" />
     <ClInclude Include="..\src\Starship.h" />
+    <ClInclude Include="..\src\Tile.h" />
+    <ClInclude Include="..\src\TiledLevel.h" />
     <ClInclude Include="..\src\TileNeighbour.h" />
     <ClInclude Include="..\src\TileStatus.h" />
     <ClInclude Include="..\src\TileType.h" />

@@ -156,6 +156,15 @@
     <ClCompile Include="..\src\PathNode.cpp">
       <Filter>Pathfinding</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Tile.cpp">
+      <Filter>Game Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\TiledLevel.cpp">
+      <Filter>Game Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\A.I\GAME3001_Labs\Lab 5\src\PathManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\StartScene.h">
@@ -340,6 +349,15 @@
     </ClInclude>
     <ClInclude Include="..\src\LOSMode.h">
       <Filter>Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Tile.h">
+      <Filter>Game Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\TiledLevel.h">
+      <Filter>Game Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\A.I\GAME3001_Labs\Lab 5\src\PathManager.h">
+      <Filter>Managers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
