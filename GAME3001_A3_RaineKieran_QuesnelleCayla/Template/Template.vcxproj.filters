@@ -162,7 +162,7 @@
     <ClCompile Include="..\src\TiledLevel.cpp">
       <Filter>Game Objects</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\A.I\GAME3001_Labs\Lab 5\src\PathManager.cpp">
+    <ClCompile Include="..\src\PathManager.cpp">
       <Filter>Managers</Filter>
     </ClCompile>
   </ItemGroup>
@@ -356,7 +356,7 @@
     <ClInclude Include="..\src\TiledLevel.h">
       <Filter>Game Objects</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\A.I\GAME3001_Labs\Lab 5\src\PathManager.h">
+    <ClInclude Include="..\src\PathManager.h">
       <Filter>Managers</Filter>
     </ClInclude>
   </ItemGroup>

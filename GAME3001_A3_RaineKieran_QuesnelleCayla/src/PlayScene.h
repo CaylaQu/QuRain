@@ -2,6 +2,7 @@
 #ifndef __PLAY_SCENE__
 #define __PLAY_SCENE__
 
+#include "BaseEnemy.h"
 #include "Obstacle.h"
 #include "Scene.h"
 #include "PathNode.h"
@@ -9,6 +10,7 @@
 #include "Target.h"
 #include "LOSMode.h" 
 #include "TiledLevel.h"
+
 
 
 class PlayScene : public Scene
@@ -37,6 +39,7 @@ private:
 	// Game Objects
 	Target* m_pTarget;
 	Starship* m_pStarship;
+	BaseEnemy* m_pBaseEnemy;
 	std::vector<Obstacle*> m_pObstacles;
 	TiledLevel* m_pLevel;
 

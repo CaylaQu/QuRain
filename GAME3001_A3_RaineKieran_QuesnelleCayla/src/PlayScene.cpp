@@ -44,14 +44,14 @@ void PlayScene::Draw()
 void PlayScene::Update()
 {
 	UpdateDisplayList();
-	m_checkAgentLOS(m_pStarship, m_pTarget);
+	m_checkAgentLOS(m_pBaseEnemy, m_pTarget);
 	switch(m_LOSMode)
 	{
 	case LOSMode::TARGET:
 		m_checkaAllNOdesWithTarget(m_pTarget);
 		break;
-	case LOSMode::SHIP:
-		m_checkaAllNOdesWithTarget(m_pStarship);
+	case LOSMode::BASEENEMY:
+		m_checkaAllNOdesWithTarget(m_pBaseEnemy);
 		break;
 	case LOSMode::BOTH:
 		m_checkAllNNodesWithBoth();
@@ -331,7 +331,7 @@ void PlayScene::m_clearNodes()
 void PlayScene::Start()
 {
 	// Set GUI Title
-	m_guiTitle = "lab 6";
+	m_guiTitle = "Assignment 3";
 
 	// setup a few more fields
 	m_LOSMode = LOSMode::TARGET; // future emu
@@ -355,8 +355,13 @@ void PlayScene::Start()
 	m_pStarship->GetTransform()->position = glm::vec2(150.0f, 300.0f);
 	AddChild(m_pStarship, 2);
 
-	//// Add Obstacles
-	//BuildObstaclePool();
+	//Add Obstacles
+	BuildObstaclePool();
+
+	m_pBaseEnemy = new BaseEnemy();
+	m_pBaseEnemy->GetTransform()->position = glm::vec2(550.0f, 400.0f);
+	AddChild(m_pBaseEnemy, 2);
+
 
 	// setup the grid
 	m_isGridEnabled = false;
@@ -402,7 +407,7 @@ void PlayScene::GUI_Function()
 
 	ImGui::Text("Path Node LOS");
 	ImGui::RadioButton("Target", &static_cast<int>(m_LOSMode), static_cast<int>(LOSMode::TARGET)); ImGui::SameLine();
-	ImGui::RadioButton("Starship", &static_cast<int>(m_LOSMode),static_cast<int>(LOSMode::SHIP)); ImGui::SameLine();
+	ImGui::RadioButton("Starship", &static_cast<int>(m_LOSMode),static_cast<int>(LOSMode::BASEENEMY)); ImGui::SameLine();
 	ImGui::RadioButton("Both1", &static_cast<int>(m_LOSMode), static_cast<int>(LOSMode::BOTH));
 
 

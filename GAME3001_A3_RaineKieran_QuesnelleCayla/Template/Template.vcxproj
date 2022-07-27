@@ -156,7 +156,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\A.I\GAME3001_Labs\Lab 5\src\PathManager.cpp" />
     <ClCompile Include="..\include\IMGUI\imgui.cpp" />
     <ClCompile Include="..\include\IMGUI\imgui_demo.cpp" />
     <ClCompile Include="..\include\IMGUI\imgui_draw.cpp" />
@@ -164,6 +163,7 @@
     <ClCompile Include="..\include\IMGUI\imgui_widgets.cpp" />
     <ClCompile Include="..\include\IMGUI_SDL\imgui_sdl.cpp" />
     <ClCompile Include="..\src\Agent.cpp" />
+    <ClCompile Include="..\src\BaseEnemy.cpp" />
     <ClCompile Include="..\src\Button.cpp" />
     <ClCompile Include="..\src\CollisionManager.cpp" />
     <ClCompile Include="..\src\ImGuiWindowFrame.cpp" />
@@ -171,6 +171,7 @@
     <ClCompile Include="..\src\NavigationObject.cpp" />
     <ClCompile Include="..\src\Obstacle.cpp" />
     <ClCompile Include="..\src\PathConnection.cpp" />
+    <ClCompile Include="..\src\PathManager.cpp" />
     <ClCompile Include="..\src\PathNode.cpp" />
     <ClCompile Include="..\src\Sprite.cpp" />
     <ClCompile Include="..\src\Starship.cpp" />
@@ -200,7 +201,6 @@
     <ClCompile Include="..\src\Util.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\A.I\GAME3001_Labs\Lab 5\src\PathManager.h" />
     <ClInclude Include="..\include\IMGUI\imconfig.h" />
     <ClInclude Include="..\include\IMGUI\imgui.h" />
     <ClInclude Include="..\include\IMGUI\imgui_internal.h" />
@@ -210,6 +210,7 @@
     <ClInclude Include="..\include\IMGUI_SDL\imgui_sdl.h" />
     <ClInclude Include="..\src\Agent.h" />
     <ClInclude Include="..\src\Animation.h" />
+    <ClInclude Include="..\src\BaseEnemy.h" />
     <ClInclude Include="..\src\Button.h" />
     <ClInclude Include="..\src\CollisionManager.h" />
     <ClInclude Include="..\src\CollisionShape.h" />
@@ -223,6 +224,7 @@
     <ClInclude Include="..\src\NodeRecord.h" />
     <ClInclude Include="..\src\Obstacle.h" />
     <ClInclude Include="..\src\PathConnection.h" />
+    <ClInclude Include="..\src\PathManager.h" />
     <ClInclude Include="..\src\PathNode.h" />
     <ClInclude Include="..\src\SoundType.h" />
     <ClInclude Include="..\src\Sprite.h" />
