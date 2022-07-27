@@ -46,18 +46,17 @@ void StartScene::HandleEvents()
 void StartScene::Start()
 {
 	const SDL_Color blue = { 0, 0, 255, 255 };
-	m_pStartLabel = new Label("START SCENE", "Consolas", 80, blue, glm::vec2(400.0f, 40.0f));
+	m_pStartLabel = new Label("Assignment 3", "Consolas", 80, blue, glm::vec2(400.0f, 40.0f));
 	m_pStartLabel->SetParent(this);
 	AddChild(m_pStartLabel);
 
-	m_pInstructionsLabel = new Label("Press 1 to Play", "Consolas", 40, blue, glm::vec2(400.0f, 120.0f));
+	m_pInstructionsLabel = new Label("Kieran Raine, 101248364", "Consolas", 40, blue, glm::vec2(400.0f, 120.0f));
 	m_pInstructionsLabel->SetParent(this);
 	AddChild(m_pInstructionsLabel);
 
-
-	m_pShip = new Ship();
-	m_pShip->GetTransform()->position = glm::vec2(400.0f, 300.0f); 
-	AddChild(m_pShip); 
+	m_pInstructionsLabel = new Label("Cayla Quesnelle, 101283672", "Consolas", 40, blue, glm::vec2(400.0f, 180.0f));
+	m_pInstructionsLabel->SetParent(this);
+	AddChild(m_pInstructionsLabel);
 
 	// Start Button
 	m_pStartButton = new Button();
