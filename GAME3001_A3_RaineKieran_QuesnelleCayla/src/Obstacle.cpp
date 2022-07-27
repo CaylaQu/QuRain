@@ -25,7 +25,7 @@ Obstacle::~Obstacle()
 
 void Obstacle::Draw()
 {
-	TextureManager::Instance().Draw("obstacle", GetTransform()->position, this, 0, 255, true);
+	TextureManager::Instance().Draw("obstacle", GetTransform()->position, this, 0, 25, true);
 }
 
 void Obstacle::Update()
