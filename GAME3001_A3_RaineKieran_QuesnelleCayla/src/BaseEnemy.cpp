@@ -34,6 +34,8 @@ void BaseEnemy::Draw()
 	// draw the line of sight
 	Util::DrawLine(GetTransform()->position + GetCurrentDirection() * 0.5f * static_cast<float>(GetWidth()),
 		GetTransform()->position + GetCurrentDirection() * GetLOSDistance(), GetLOSColour());
+
+	Util::DrawCircle(GetTransform()->position, 100,GetLOSColour(),ShapeType::SYMMETRICAL,Renderer::Instance().GetRenderer());
 }
 
 void BaseEnemy::Update()
