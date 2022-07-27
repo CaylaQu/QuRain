@@ -419,15 +419,15 @@ void PlayScene::GUI_Function()
 	static int shipPosition[] = { static_cast<int>(m_pStarship->GetTransform()->position.x), static_cast<int>(m_pStarship->GetTransform()->position.y)};
 	if (ImGui::SliderInt2("Ship Position", shipPosition, 0, 800))
 	{
-		m_pStarship->GetTransform()->position.x = static_cast<float>(shipPosition[0]);
-		m_pStarship->GetTransform()->position.y = static_cast<float>(shipPosition[1]);
+		m_pBaseEnemy->GetTransform()->position.x = static_cast<float>(shipPosition[0]);
+		m_pBaseEnemy->GetTransform()->position.y = static_cast<float>(shipPosition[1]);
 	}
 
 	// allow the ship to rotate
 	static int angle;
 	if (ImGui::SliderInt("Ship Direction", &angle, -360, 360))
 	{
-		m_pStarship->SetCurrentHeading(static_cast<float>(angle));
+		m_pBaseEnemy->SetCurrentHeading(static_cast<float>(angle));
 	}
 
 	// Target properties

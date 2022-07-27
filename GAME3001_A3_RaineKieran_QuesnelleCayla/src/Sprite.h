@@ -2,12 +2,12 @@
 #ifndef __SPRITE__
 #define __SPRITE__
 
-#include "DisplayObject.h"
+#include "NavigationObject.h"
 #include "Animation.h"
 #include <unordered_map>
 #include "SpriteSheet.h"
 
-class Sprite : public DisplayObject
+class Sprite : public NavigationObject
 {
 public:
 	Sprite();
