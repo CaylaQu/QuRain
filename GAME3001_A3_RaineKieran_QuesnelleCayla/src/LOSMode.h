@@ -6,6 +6,7 @@ enum class LOSMode
 {
 	TARGET,
 	SHIP,
-	BOTH
+	BOTH,
+	BASEENEMY
 };
 #endif
