@@ -44,11 +44,11 @@ void PlayScene::Draw()
 void PlayScene::Update()
 {
 	UpdateDisplayList();
-	m_checkAgentLOS(m_pBaseEnemy, m_pTarget);
+	m_checkAgentLOS(m_pBaseEnemy, m_pStarship);
 	switch(m_LOSMode)
 	{
 	case LOSMode::TARGET:
-		m_checkaAllNOdesWithTarget(m_pTarget);
+		m_checkaAllNOdesWithTarget(m_pStarship);
 		break;
 	case LOSMode::BASEENEMY:
 		m_checkaAllNOdesWithTarget(m_pBaseEnemy);
@@ -107,11 +107,23 @@ void PlayScene::GetPlayerInput()
 		// handle player movement with mouse and keyboard
 		if (EventManager::Instance().IsKeyDown(SDL_SCANCODE_A))
 		{
-			
+			m_pStarship->GetTransform()->position.x -= 9.0f;
 		}
 		else if (EventManager::Instance().IsKeyDown(SDL_SCANCODE_D))
 		{
-			
+			m_pStarship->GetTransform()->position.x += 9.0f;
+		}
+		if (EventManager::Instance().IsKeyDown(SDL_SCANCODE_W))
+		{
+			m_pStarship->GetTransform()->position.y -= 9.0f;
+		}
+		if (EventManager::Instance().IsKeyDown(SDL_SCANCODE_S))
+		{
+			m_pStarship->GetTransform()->position.y += 9.0f;
+		}
+		if (EventManager::Instance().IsKeyDown(SDL_SCANCODE_H))
+		{
+			m_toggleGrid(m_isGridEnabled);
 		}
 		else
 		{
@@ -144,11 +156,19 @@ void PlayScene::GetPlayerInput()
 		}
 		else if (EventManager::Instance().IsKeyDown(SDL_SCANCODE_A))
 		{
-			
+		
 		}
 		else if (EventManager::Instance().IsKeyDown(SDL_SCANCODE_D))
 		{
 			
+		}
+		else if (EventManager::Instance().IsKeyDown(SDL_SCANCODE_W))
+		{
+
+		}
+		else if (EventManager::Instance().IsKeyDown(SDL_SCANCODE_S))
+		{
+
 		}
 		else
 		{
@@ -299,9 +319,9 @@ void PlayScene::m_checkAllNNodesWithBoth()
 {
 	for (auto path_node : m_pGrid)
 	{
-		bool LOSWidthStarShip = m_checkPathNodesLOS(path_node, m_pBaseEnemy);
-		bool LOSWidthTarget = m_checkPathNodesLOS(path_node, m_pTarget);
-		path_node->SetHasLOS(LOSWidthStarShip && LOSWidthTarget, glm::vec4(0, 1, 1, 1));
+		bool LOSWidthBaseEnemy = m_checkPathNodesLOS(path_node, m_pBaseEnemy);
+		bool LOSWidthTarget = m_checkPathNodesLOS(path_node, m_pStarship);
+		path_node->SetHasLOS(LOSWidthBaseEnemy && LOSWidthTarget, glm::vec4(0, 1, 1, 1));
 	}
 }
 
@@ -395,10 +415,10 @@ void PlayScene::GUI_Function()
 	ImGui::Separator();
 
 
-	if (ImGui::Checkbox("Toggle Grid", &m_isGridEnabled))
-	{
-		m_toggleGrid(m_isGridEnabled);
-	}
+	//if (ImGui::Checkbox("Toggle Grid", &m_isGridEnabled))
+	//{
+	//	m_toggleGrid(m_isGridEnabled);
+	//}
 
 	ImGui::Separator();
 
@@ -417,7 +437,7 @@ void PlayScene::GUI_Function()
 	// spaceship properties
 
 	static int shipPosition[] = { static_cast<int>(m_pStarship->GetTransform()->position.x), static_cast<int>(m_pStarship->GetTransform()->position.y)};
-	if (ImGui::SliderInt2("Ship Position", shipPosition, 0, 800))
+	if (ImGui::SliderInt2("Enemy Position", shipPosition, 0, 800))
 	{
 		m_pBaseEnemy->GetTransform()->position.x = static_cast<float>(shipPosition[0]);
 		m_pBaseEnemy->GetTransform()->position.y = static_cast<float>(shipPosition[1]);
@@ -425,7 +445,7 @@ void PlayScene::GUI_Function()
 
 	// allow the ship to rotate
 	static int angle;
-	if (ImGui::SliderInt("Ship Direction", &angle, -360, 360))
+	if (ImGui::SliderInt("Enemy Direction", &angle, -360, 360))
 	{
 		m_pBaseEnemy->SetCurrentHeading(static_cast<float>(angle));
 	}
