@@ -18,6 +18,10 @@ BaseEnemy::BaseEnemy()
 	// New for Lab 3
 	SetLOSDistance(300.0f);
 	SetWhiskerAngle(45.0f);
+
+	SetLOSColour(glm::vec4(1, 0, 0, 1));
+
+	SetType(GameObjectType::AGENT);
 }
 
 BaseEnemy::~BaseEnemy()
