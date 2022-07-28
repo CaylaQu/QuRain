@@ -123,7 +123,7 @@ void PlayScene::GetPlayerInput()
 		}
 		if (EventManager::Instance().IsKeyDown(SDL_SCANCODE_H))
 		{
-			m_toggleGrid(m_isGridEnabled);
+			
 		}
 		else
 		{
@@ -391,9 +391,11 @@ void PlayScene::Start()
 	// preload sounds
 	SoundManager::Instance().Load("../Assets/audio/yay.ogg", "yay", SoundType::SOUND_SFX);
 	SoundManager::Instance().Load("../Assets/audio/thunder.ogg", "thunder", SoundType::SOUND_SFX);
-
+	SoundManager::Instance().Load("../Assets/audio/Pixelland.mp3", "BackgroundMusic", SoundType::SOUND_MUSIC);
 	/* DO NOT REMOVE */
 	ImGuiWindowFrame::Instance().SetGuiFunction([this] { GUI_Function(); });
+	SoundManager::Instance().PlayMusic("BackgroundMusic", -1, 0);
+	SoundManager::Instance().SetMusicVolume(3);
 }
 
 void PlayScene::GUI_Function()
@@ -415,10 +417,10 @@ void PlayScene::GUI_Function()
 	ImGui::Separator();
 
 
-	//if (ImGui::Checkbox("Toggle Grid", &m_isGridEnabled))
-	//{
-	//	m_toggleGrid(m_isGridEnabled);
-	//}
+	if (ImGui::Checkbox("Toggle Grid", &m_isGridEnabled))
+	{
+		m_toggleGrid(m_isGridEnabled);
+	}
 
 	ImGui::Separator();
 
