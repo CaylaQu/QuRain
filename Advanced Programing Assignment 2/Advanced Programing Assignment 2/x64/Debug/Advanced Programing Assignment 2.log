@@ -1,0 +1,4 @@
+﻿  Source.cpp
+C:\Users\kiera\Desktop\Programing\Advanced Programing Assignment 2\Advanced Programing Assignment 2\Source.cpp(12,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+Source.obj : error LNK2019: unresolved external symbol "public: virtual __cdecl Agent::~Agent(void)" (??1Agent@@UEAA@XZ) referenced in function "public: virtual void * __cdecl Agent::`scalar deleting destructor'(unsigned int)" (??_GAgent@@UEAAPEAXI@Z)
+C:\Users\kiera\Desktop\Programing\Advanced Programing Assignment 2\x64\Debug\Advanced Programing Assignment 2.exe : fatal error LNK1120: 1 unresolved externals
