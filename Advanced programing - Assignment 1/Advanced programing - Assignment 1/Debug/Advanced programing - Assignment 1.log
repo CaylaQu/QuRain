@@ -1,0 +1,5 @@
+﻿  Assignment 1.cpp
+C:\Users\cayla\Desktop\Advanced Programming\Advanced programing - Assignment 1\Advanced programing - Assignment 1\Assignment 1.cpp(131,16): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\cayla\Desktop\Advanced Programming\Advanced programing - Assignment 1\Advanced programing - Assignment 1\Assignment 1.cpp(201,19): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\cayla\Desktop\Advanced Programming\Advanced programing - Assignment 1\Advanced programing - Assignment 1\Assignment 1.cpp(296,81): error C2039: 'getPresentHP': is not a member of 'BaseCharacter'
+C:\Users\cayla\Desktop\Advanced Programming\Advanced programing - Assignment 1\Advanced programing - Assignment 1\Assignment 1.cpp(23): message : see declaration of 'BaseCharacter'
