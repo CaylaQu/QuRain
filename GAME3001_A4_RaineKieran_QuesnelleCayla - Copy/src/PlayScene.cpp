@@ -35,7 +35,8 @@ void PlayScene::Draw()
 			auto offset = glm::vec2(element->GetWidth() * 0.5, element->GetHeight() * 0.5);
 			Util::DrawRect(element->GetTransform()->position - offset, element->GetWidth(), element->GetHeight());
 		}
-
+		auto detected = m_pRangedEnemy->GetTree()->GetPlayerDetectedNode()->GetDetected();
+		Util::DrawCircle(m_pRangedEnemy->GetTransform()->position, 300.0f, detected ? glm::vec4(0, 1, 0, 1) : glm::vec4(1, 0, 0, 1));
 	}
 	
 	SDL_SetRenderDrawColor(Renderer::Instance().GetRenderer(), 255, 255, 255, 255);
@@ -44,14 +45,29 @@ void PlayScene::Draw()
 void PlayScene::Update()
 {
 	UpdateDisplayList();
-	m_checkAgentLOS(m_pBaseEnemy, m_pStarship);
+
+	m_pRangedEnemy->GetTree()->GetEnemyHealthNode()->SetHealth(m_pRangedEnemy->GetHealth() > 25);
+	m_pRangedEnemy->GetTree()->GetEnemyHitNode()->SetIsHit(false);
+	m_pRangedEnemy->CheckAgentLOSToTarget(m_pRangedEnemy, m_pTarget, m_pObstacles);
+
+	// Distance Check between Starship and Target for Detection Radius
+	float distance = Util::Distance(m_pRangedEnemy->GetTransform()->position, m_pTarget->GetTransform()->position);
+
+	// Radius detection...just outside of LOS range (around 300 px)
+	m_pRangedEnemy->GetTree()->GetPlayerDetectedNode()->SetDetected(distance < 300);
+
+	// Within LOS distance...but not too close (optimum firing range)
+	m_pRangedEnemy->GetTree()->GetRangedCombatNode()->SetIsWithinCombatRange(distance >= 200 && distance <= 350);
+
+
+	m_checkAgentLOS(m_pRangedEnemy, m_pRangedEnemy);
 	switch(m_LOSMode)
 	{
 	case LOSMode::TARGET:
-		m_checkaAllNOdesWithTarget(m_pStarship);
+		m_checkaAllNOdesWithTarget(m_pRangedEnemy);
 		break;
 	case LOSMode::BASEENEMY:
-		m_checkaAllNOdesWithTarget(m_pBaseEnemy);
+		m_checkaAllNOdesWithTarget(m_pRangedEnemy);
 		break;
 	case LOSMode::BOTH:
 		m_checkAllNNodesWithBoth();
@@ -268,33 +284,33 @@ void PlayScene::m_toggleGrid(bool state)
 
 bool PlayScene::m_checkAgentLOS(Agent* agent, DisplayObject* target_objects)
 {
-	bool has_LOS = false; 
-
+	bool has_LOS = false; // default - no LOS
 	agent->SetHasLOS(has_LOS);
-	glm::vec4 LOSColour;  
 
+	// if ship to target distance is less than or equal to the LOS Distance (Range)
 	const auto agent_to_range = Util::GetClosestEdge(agent->GetTransform()->position, target_objects);
 	if (agent_to_range <= agent->GetLOSDistance())
 	{
+		// we are in range
 		std::vector<DisplayObject*> contact_list;
 		for (auto display_object : GetDisplayList())
 		{
-			const auto agent_to_Object_distance = Util::GetClosestEdge(agent->GetTransform()->position, display_object);
-			if (agent_to_Object_distance > agent_to_range) { continue; } // target is out of range
+			if (display_object->GetType() == GameObjectType::NONE) { continue;  }
+
+			const auto agent_to_object_distance = Util::GetClosestEdge(agent->GetTransform()->position, display_object);
+			if (agent_to_object_distance > agent_to_range) { continue; } // target is out of range
 			if((display_object->GetType() != GameObjectType::AGENT) && (display_object->GetType() != GameObjectType::PATH_NODE) && (display_object->GetType() != GameObjectType::TARGET))
 			{
 				contact_list.push_back(display_object);
 			}
-
-
 		}
 
 		const glm::vec2 agent_LOS_end_point = agent->GetTransform()->position + agent->GetCurrentDirection() * agent->GetLOSDistance();
 		has_LOS = CollisionManager::LOSCheck(agent, agent_LOS_end_point, contact_list, target_objects);
 
-		LOSColour = (target_objects->GetType() == GameObjectType::AGENT) ? glm::vec4(0, 0, 1, 1) : glm::vec4(0, 1, 0, 1);
-		agent->SetHasLOS(has_LOS, LOSColour);
 	}
+	agent->SetHasLOS(has_LOS);
+
 	return has_LOS;
 }
 
@@ -319,7 +335,7 @@ void PlayScene::m_checkAllNNodesWithBoth()
 {
 	for (auto path_node : m_pGrid)
 	{
-		bool LOSWidthBaseEnemy = m_checkPathNodesLOS(path_node, m_pBaseEnemy);
+		bool LOSWidthBaseEnemy = m_checkPathNodesLOS(path_node, m_pRangedEnemy);
 		bool LOSWidthTarget = m_checkPathNodesLOS(path_node, m_pStarship);
 		path_node->SetHasLOS(LOSWidthBaseEnemy && LOSWidthTarget, glm::vec4(0, 1, 1, 1));
 	}
@@ -378,9 +394,11 @@ void PlayScene::Start()
 	//Add Obstacles
 	BuildObstaclePool();
 
-	m_pBaseEnemy = new BaseEnemy();
-	m_pBaseEnemy->GetTransform()->position = glm::vec2(550.0f, 400.0f);
-	AddChild(m_pBaseEnemy, 2);
+	m_pRangedEnemy = new RangedCombatEnemy(this);
+	m_pRangedEnemy->GetTransform()->position = glm::vec2(400.0f, 40.0f);
+	AddChild(m_pRangedEnemy, 2);
+
+	
 
 
 	// setup the grid
@@ -427,29 +445,31 @@ void PlayScene::GUI_Function()
 	//ImGui::SetNextWindowPos(ImVec2(0, 0), ImGuiCond_Always);
 	//ImGui::Begin(m_guiTitle.c_str(), nullptr, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoMove);
 
+	static int LOS_mode = static_cast<int>(m_LOSMode);
 	ImGui::Text("Path Node LOS");
-	ImGui::RadioButton("Target", &static_cast<int>(m_LOSMode), static_cast<int>(LOSMode::TARGET)); ImGui::SameLine();
-	ImGui::RadioButton("Enemy", &static_cast<int>(m_LOSMode),static_cast<int>(LOSMode::BASEENEMY)); ImGui::SameLine();
-	ImGui::RadioButton("Both1", &static_cast<int>(m_LOSMode), static_cast<int>(LOSMode::BOTH));
+	ImGui::RadioButton("Target", &LOS_mode, static_cast<int>(LOSMode::TARGET)); ImGui::SameLine();
+	ImGui::RadioButton("StarShip", &LOS_mode, static_cast<int>(LOSMode::SHIP)); ImGui::SameLine();
+	ImGui::RadioButton("Both Target & StarShip", &LOS_mode, static_cast<int>(LOSMode::BOTH));
 
+	m_LOSMode = static_cast<LOSMode>(LOS_mode);
 
 
 	ImGui::Separator();
 
 	// spaceship properties
 
-	static int shipPosition[] = { static_cast<int>(m_pBaseEnemy->GetTransform()->position.x), static_cast<int>(m_pBaseEnemy->GetTransform()->position.y)};
+	static int shipPosition[] = { static_cast<int>(m_pRangedEnemy->GetTransform()->position.x), static_cast<int>(m_pRangedEnemy->GetTransform()->position.y)};
 	if (ImGui::SliderInt2("Enemy Position", shipPosition, 0, 800))
 	{
-		m_pBaseEnemy->GetTransform()->position.x = static_cast<float>(shipPosition[0]);
-		m_pBaseEnemy->GetTransform()->position.y = static_cast<float>(shipPosition[1]);
+		m_pRangedEnemy->GetTransform()->position.x = static_cast<float>(shipPosition[0]);
+		m_pRangedEnemy->GetTransform()->position.y = static_cast<float>(shipPosition[1]);
 	}
 
 	// allow the ship to rotate
 	static int angle;
 	if (ImGui::SliderInt("Enemy Direction", &angle, -360, 360))
 	{
-		m_pBaseEnemy->SetCurrentHeading(static_cast<float>(angle));
+		m_pRangedEnemy->SetCurrentHeading(static_cast<float>(angle));
 	}
 
 	// Target properties

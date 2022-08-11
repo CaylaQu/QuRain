@@ -37,6 +37,21 @@
     <Filter Include="Pathfinding">
       <UniqueIdentifier>{1a3513a7-34e7-4b1d-a612-b2811d1462ec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Decisions">
+      <UniqueIdentifier>{5dc93052-8a54-4cfa-b6b9-4cd215d1ab6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Decisions\Actions">
+      <UniqueIdentifier>{dfe215d7-2497-4bca-b930-5da13266a789}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Decisions\Agents">
+      <UniqueIdentifier>{78cc8159-5025-46e9-975b-75e2dcef5b2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Decisions\Conditions">
+      <UniqueIdentifier>{d12680a9-4f84-4bf1-841c-6936fcf96ace}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Decisions\Core">
+      <UniqueIdentifier>{2e478860-19e2-44b3-9ea2-081f974a8987}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\StartScene.cpp">
@@ -120,9 +135,6 @@
     <ClCompile Include="..\src\Obstacle.cpp">
       <Filter>Game Objects</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Agent.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
     <ClCompile Include="..\include\IMGUI\imgui.cpp">
       <Filter>IMGUI</Filter>
     </ClCompile>
@@ -144,9 +156,6 @@
     <ClCompile Include="..\src\NavigationObject.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Starship.cpp">
-      <Filter>Game Objects</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\Megaman.cpp">
       <Filter>Game Objects</Filter>
     </ClCompile>
@@ -164,6 +173,67 @@
     </ClCompile>
     <ClCompile Include="..\src\PathManager.cpp">
       <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\BaseEnemy.cpp" />
+    <ClCompile Include="..\src\AttackAction.cpp">
+      <Filter>Decisions\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\FleeAction.cpp">
+      <Filter>Decisions\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MoveToCoverAction.cpp">
+      <Filter>Decisions\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MoveToLOSAction.cpp">
+      <Filter>Decisions\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MoveToPlayerAction.cpp">
+      <Filter>Decisions\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MoveToRangeAction.cpp">
+      <Filter>Decisions\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\PatrolAction.cpp">
+      <Filter>Decisions\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\WaitBehindCoverAction.cpp">
+      <Filter>Decisions\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\CloseCombatEnemy.cpp">
+      <Filter>Decisions\Agents</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\RangedCombatEnemy.cpp">
+      <Filter>Decisions\Agents</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Starship.cpp">
+      <Filter>Decisions\Agents</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\CloseCombatCondition.cpp">
+      <Filter>Decisions\Conditions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\EnemyHealthCondition.cpp">
+      <Filter>Decisions\Conditions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\EnemyHitCondition.cpp">
+      <Filter>Decisions\Conditions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LOSCondition.cpp">
+      <Filter>Decisions\Conditions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\PlayerDetectedCondition.cpp">
+      <Filter>Decisions\Conditions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\RadiusCondition.cpp">
+      <Filter>Decisions\Conditions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\RangedCombatCondition.cpp">
+      <Filter>Decisions\Conditions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Agent.cpp">
+      <Filter>Decisions\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\DecisionTree.cpp">
+      <Filter>Decisions\Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -284,9 +354,6 @@
     <ClInclude Include="..\src\Obstacle.h">
       <Filter>Game Objects</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Agent.h">
-      <Filter>Core</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\IMGUI\imconfig.h">
       <Filter>IMGUI</Filter>
     </ClInclude>
@@ -316,9 +383,6 @@
     </ClInclude>
     <ClInclude Include="..\src\InputType.h">
       <Filter>Enums</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\Starship.h">
-      <Filter>Game Objects</Filter>
     </ClInclude>
     <ClInclude Include="..\src\TileNeighbour.h">
       <Filter>Enums</Filter>
@@ -358,6 +422,82 @@
     </ClInclude>
     <ClInclude Include="..\src\PathManager.h">
       <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\BaseEnemy.h" />
+    <ClInclude Include="..\src\AttackAction.h">
+      <Filter>Decisions\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\FleeAction.h">
+      <Filter>Decisions\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MoveToCoverAction.h">
+      <Filter>Decisions\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MoveToLOSAction.h">
+      <Filter>Decisions\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MoveToPlayerAction.h">
+      <Filter>Decisions\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MoveToRangeAction.h">
+      <Filter>Decisions\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\PatrolAction.h">
+      <Filter>Decisions\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\WaitBehindCoverAction.h">
+      <Filter>Decisions\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\CloseCombatEnemy.h">
+      <Filter>Decisions\Agents</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\RangedCombatEnemy.h">
+      <Filter>Decisions\Agents</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Starship.h">
+      <Filter>Decisions\Agents</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\CloseCombatCondition.h">
+      <Filter>Decisions\Conditions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\EnemyHealthCondition.h">
+      <Filter>Decisions\Conditions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\EnemyHitCondition.h">
+      <Filter>Decisions\Conditions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\LOSCondition.h">
+      <Filter>Decisions\Conditions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\PlayerDetectedCondition.h">
+      <Filter>Decisions\Conditions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\RadiusCondition.h">
+      <Filter>Decisions\Conditions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\RangedCombatCondition.h">
+      <Filter>Decisions\Conditions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Agent.h">
+      <Filter>Decisions\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ActionNode.h">
+      <Filter>Decisions\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ConditionNode.h">
+      <Filter>Decisions\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\DecisionTree.h">
+      <Filter>Decisions\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\TreeNode.h">
+      <Filter>Decisions\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ActionState.h">
+      <Filter>Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\TreeNodeType.h">
+      <Filter>Enums</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

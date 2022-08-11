@@ -5,11 +5,7 @@
 
 BaseEnemy::BaseEnemy()
 {
-	TextureManager::Instance().Load("../Assets/textures/dino.png", "mm");
 
-	const auto size = TextureManager::Instance().GetTextureSize("mm");
-	SetWidth(static_cast<int>(size.x));
-	SetHeight(static_cast<int>(size.y));
 	GetTransform()->position = m_startPos;
 	GetRigidBody()->velocity = glm::vec2(0, 0);
 	GetRigidBody()->acceleration = glm::vec2(0, 0);

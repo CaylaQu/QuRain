@@ -10,6 +10,9 @@
 #include "Target.h"
 #include "LOSMode.h" 
 #include "TiledLevel.h"
+#include "RangedCombatEnemy.h"
+#include "CloseCombatEnemy.h"
+
 
 
 
@@ -31,6 +34,8 @@ private:
 	std::string m_guiTitle;
 	bool m_isGridEnabled;
 
+
+
 	// Input Control
 	int m_pCurrentInputType{};
 	void GetPlayerInput();
@@ -39,7 +44,7 @@ private:
 	// Game Objects
 	Target* m_pTarget;
 	Starship* m_pStarship;
-	BaseEnemy* m_pBaseEnemy;
+	RangedCombatEnemy* m_pRangedEnemy;
 	std::vector<Obstacle*> m_pObstacles;
 	TiledLevel* m_pLevel;
 

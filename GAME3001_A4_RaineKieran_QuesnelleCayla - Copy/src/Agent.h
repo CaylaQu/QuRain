@@ -3,9 +3,12 @@
 #define __AGENT__
 
 #include <glm/vec4.hpp>
-#include "Sprite.h"
 
-class Agent : public Sprite
+#include "ActionState.h"
+#include "NavigationObject.h"
+#include "Obstacle.h"
+
+class Agent : public NavigationObject
 {
 public:
 	Agent();
@@ -28,8 +31,15 @@ public:
 	glm::vec2 GetMiddleLOSEndPoint() const;
 	glm::vec2 GetRightLOSEndPoint() const;
 	bool* GetCollisionWhiskers(); // Returning entire array
-	glm::vec4 GetLineColor(int index);
+	glm::vec4 GetLineColor(int index) const;
 	float GetWhiskerAngle() const;
+
+	ActionState GetActionState() const;
+
+	// New For Lab 7 Part 3
+	int GetHealth() const;
+	void SetHealth(int value);
+	void TakeDamage(int value);
 
 	// setters
 	void SetTargetPosition(glm::vec2 new_position);
@@ -37,6 +47,7 @@ public:
 	void SetLOSDistance(float distance);
 	void SetHasLOS(bool state);
 	void SetHasLOS(bool state, glm::vec4 colour);
+
 	void SetCurrentHeading(float heading);
 	void SetLOSColour(glm::vec4 colour);
 
@@ -47,6 +58,22 @@ public:
 	void SetWhiskerAngle(float angle);
 
 	void UpdateWhiskers(float angle);
+
+	void SetActionState(ActionState state);
+
+	// new for Lab 7 part 2
+	// Utility function
+	bool CheckAgentLOSToTarget(Agent* agent, DisplayObject* target_object, const std::vector<Obstacle*>& obstacles);
+	// Virtual functions
+	virtual void Attack(){}
+	virtual void MoveToLOS() {}
+	virtual void MoveToPlayer() {}
+	virtual void MoveToRange() {}
+	virtual void Patrol() {}
+	// new for Lab 7 part 3
+	virtual void Flee() {}
+	virtual void MoveToCover() {}
+	virtual void WaitBehindCover() {}
 
 private:
 	void ChangeDirection(); // From scalar to vec2.
@@ -67,6 +94,12 @@ private:
 	glm::vec4 m_lineColor[3]; // left, middle, right.
 	bool m_collisionWhiskers[3] = { false };
 	float m_whiskerAngle; // Also for you maybe a m_whiskerAngle2;
+
+	// action state
+	ActionState m_state;
+
+	// New For Lab 7 part 3
+	int m_health = 100;
 };
 
 
