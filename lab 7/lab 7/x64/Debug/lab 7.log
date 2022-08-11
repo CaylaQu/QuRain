@@ -1,0 +1,5 @@
+﻿  NPC.cpp
+  Source.cpp
+C:\Users\kiera\Desktop\Programing\lab 7\lab 7\Source.cpp(49,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Generating Code...
+  lab 7.vcxproj -> C:\Users\kiera\Desktop\Programing\lab 7\x64\Debug\lab 7.exe

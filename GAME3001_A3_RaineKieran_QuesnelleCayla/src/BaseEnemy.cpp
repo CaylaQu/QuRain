@@ -5,7 +5,7 @@
 
 BaseEnemy::BaseEnemy()
 {
-	TextureManager::Instance().Load("../Assets/textures/megaman_small.png", "mm");
+	TextureManager::Instance().Load("../Assets/textures/dino.png", "mm");
 
 	const auto size = TextureManager::Instance().GetTextureSize("mm");
 	SetWidth(static_cast<int>(size.x));

@@ -438,7 +438,7 @@ void PlayScene::GUI_Function()
 
 	// spaceship properties
 
-	static int shipPosition[] = { static_cast<int>(m_pStarship->GetTransform()->position.x), static_cast<int>(m_pStarship->GetTransform()->position.y)};
+	static int shipPosition[] = { static_cast<int>(m_pBaseEnemy->GetTransform()->position.x), static_cast<int>(m_pBaseEnemy->GetTransform()->position.y)};
 	if (ImGui::SliderInt2("Enemy Position", shipPosition, 0, 800))
 	{
 		m_pBaseEnemy->GetTransform()->position.x = static_cast<float>(shipPosition[0]);
