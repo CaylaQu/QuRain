@@ -48,10 +48,10 @@ void PlayScene::Update()
 
 	m_pRangedEnemy->GetTree()->GetEnemyHealthNode()->SetHealth(m_pRangedEnemy->GetHealth() > 25);
 	m_pRangedEnemy->GetTree()->GetEnemyHitNode()->SetIsHit(false);
-	m_pRangedEnemy->CheckAgentLOSToTarget(m_pRangedEnemy, m_pTarget, m_pObstacles);
+	m_pRangedEnemy->CheckAgentLOSToTarget(m_pRangedEnemy, m_pStarship, m_pObstacles);
 
 	// Distance Check between Starship and Target for Detection Radius
-	float distance = Util::Distance(m_pRangedEnemy->GetTransform()->position, m_pTarget->GetTransform()->position);
+	float distance = Util::Distance(m_pRangedEnemy->GetTransform()->position, m_pStarship->GetTransform()->position);
 
 	// Radius detection...just outside of LOS range (around 300 px)
 	m_pRangedEnemy->GetTree()->GetPlayerDetectedNode()->SetDetected(distance < 300);

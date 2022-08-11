@@ -31,9 +31,7 @@ void Starship::Draw()
 	// draw the target
 	TextureManager::Instance().Draw("starship", GetTransform()->position, GetCurrentHeading(), 255, true);
 
-	// draw the line of sight
-	Util::DrawLine(GetTransform()->position + GetCurrentDirection() * 0.5f * static_cast<float>(GetWidth()),
-		GetTransform()->position + GetCurrentDirection() * GetLOSDistance(), GetLOSColour());
+	
 }
 
 void Starship::Update()
