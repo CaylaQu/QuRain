@@ -2,6 +2,8 @@
 #include <ctime>
 #include <fstream>
 #include "Agent.h"
+#include<conio.h>
+#include<stdlib.h>
 
 using namespace std;
 
@@ -82,8 +84,86 @@ void simulateCombat(Agent agent1, Agent agent2)
 
 
 }
+class Player
 
 
+
+
+
+
+
+
+
+
+
+
+class Maplevel
+{
+private: 
+	int** mapData;
+	int maxRows, maxColumns;
+
+public:
+	void MapData(string filename)
+	{
+		ifstream in;
+		in.open(filename.c_str());
+		if (in.is_open())
+		{
+			in >> maxRows;
+			in >> maxColumns;
+			mapData = new int* [maxRows];
+			for (int x = 0; x < maxRows; x++)
+			{
+				mapData[x] = new int[maxColumns];
+			}
+
+
+
+
+
+
+
+
+		}
+		in.close();
+
+
+
+	 }
+	
+	string getMap() {
+		stringstream ss;
+		 char wallSymbol = (char)176;
+		 for (int r = 0; r < maxRows; r++)
+		 {
+			 for (int c = 0; c < maxColumns; c++)
+			 {
+				 if (mapData[r][c] == 0)
+				 {
+					 ss << " ";
+				 }
+				 else
+					 ss << wallSymbol << wallSymbol;
+
+
+			}
+			 ss << "\n";
+
+
+
+
+
+		 }
+
+		 return ss.str
+	}
+
+
+
+
+
+};
 
 
 
@@ -92,7 +172,10 @@ void simulateCombat(Agent agent1, Agent agent2)
 
 int main()
 {
-
-
+	Player* p1l = new Player(0, 0, 'P');
+	Player* p12 = new Player(18, 0, 'P');
+ 	Maplevel level ("c:\\map1.txt");
+	cout << level.getMap();
 	return 0;
+
 }
