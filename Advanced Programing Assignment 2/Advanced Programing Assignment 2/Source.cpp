@@ -4,11 +4,12 @@
 #include "Agent.h"
 #include<conio.h>
 #include<stdlib.h>
+#include  <sstream>
 
 using namespace std;
 
 
-void simulateCombat(Agent agent1, Agent agent2)
+void simulateCombat(Agent* agent1, Agent* agent2)
 {
 
 	srand(time(0));
@@ -22,28 +23,35 @@ void simulateCombat(Agent agent1, Agent agent2)
 		cout << "Player Goes First!" << endl;
 		while(true)
 		{
-			agent1.fight(agent2);
-			cout << agent1.getName() << " attacks " << agent2.getName() << endl;
-			agent1.displayStats();
-			agent2.displayStats();
+			agent1->fight(agent2);
+			cout << "---------------------" << endl;
+			cout << agent1->getName() << " Attacks " << agent2->getName() << endl;
+			cout << "---------------------" << endl;
+			agent1->displayStats();
+			agent2->displayStats();
 
-			if(agent2.isDead())
+			if(agent2->isDead())
 			{
-				cout << agent2.getName() << " is Dead." << endl;
+				agent2->deadMessage();
+
 				break;
 			}
+			
 
-			agent2.fight(agent1);
-			cout << agent2.getName() << " attacks " << agent1.getName() << endl;
-			agent1.displayStats();
-			agent2.displayStats();
+			agent2->fight(agent1);
+			cout << "---------------------" << endl;
+			cout << agent2->getName() << " Attacks " << agent1->getName() << endl;
+			cout << "---------------------" << endl;
+			agent1->displayStats();
+			agent2->displayStats();
 
-			if (agent1.isDead())
+			if (agent1->isDead())
 			{
-				cout << agent1.getName() << " is Dead." << endl;
+				agent1->deadMessage();
+
 				break;
 			}
-
+			
 		}
 
 		
@@ -54,25 +62,31 @@ void simulateCombat(Agent agent1, Agent agent2)
 		cout << "Enemy Goes First!" << endl;
 		while (true)
 		{
-			agent2.fight(agent1);
-			cout << agent2.getName() << " attacks " << agent1.getName() << endl;
-			agent2.displayStats();
-			agent1.displayStats();
+			agent2->fight(agent1);
+			cout << "---------------------" << endl;
+			cout << agent2->getName() << " attacks " << agent1->getName() << endl;
+			cout << "---------------------" << endl;
+			agent2->displayStats();
+			agent1->displayStats();
 
-			if (agent1.isDead())
+			if (agent1->isDead())
 			{
-				cout << agent1.getName() << " is Dead." << endl;
+				agent1->deadMessage();
+
 				break;
 			}
 
-			agent1.fight(agent2);
-			cout << agent1.getName() << " attacks " << agent2.getName() << endl;
-			agent2.displayStats();
-			agent1.displayStats();
+			agent1->fight(agent2);
+			cout << "---------------------" << endl;
+			cout << agent1->getName() << " attacks " << agent2->getName() << endl;
+			cout << "---------------------" << endl;
+			agent2->displayStats();
+			agent1->displayStats();
 
-			if (agent2.isDead())
+			if (agent2->isDead())
 			{
-				cout << agent1.getName() << " is Dead." << endl;
+				agent2->deadMessage();
+
 				break;
 			}
 
@@ -84,13 +98,7 @@ void simulateCombat(Agent agent1, Agent agent2)
 
 
 }
-class Player
-
-
-
-
-
-
+//class Player
 
 
 
@@ -104,6 +112,7 @@ private:
 	int maxRows, maxColumns;
 
 public:
+	Maplevel();
 	void MapData(string filename)
 	{
 		ifstream in;
@@ -132,7 +141,8 @@ public:
 
 	 }
 	
-	string getMap() {
+	string getMap()
+	{
 		stringstream ss;
 		 char wallSymbol = (char)176;
 		 for (int r = 0; r < maxRows; r++)
@@ -156,7 +166,7 @@ public:
 
 		 }
 
-		 return ss.str
+		 return ss.str;
 	}
 
 
@@ -172,10 +182,16 @@ public:
 
 int main()
 {
-	Player* p1l = new Player(0, 0, 'P');
-	Player* p12 = new Player(18, 0, 'P');
- 	Maplevel level ("c:\\map1.txt");
-	cout << level.getMap();
-	return 0;
+	Player* p1l = new Player("Player", 10, 20);
+	Kobalt* k1l = new Kobalt("Player", 10, 20);
+	simulateCombat(p1l, k1l);
 
+	//Player* p1l = new Player(0, 0, 'p');
+	//Player* p12 = new Player(18, 0, 'P');
+	
+	Maplevel level;
+	level.MapData("c:\\map1.txt");
+	cout << level.getMap();
+
+	return 0;
 }

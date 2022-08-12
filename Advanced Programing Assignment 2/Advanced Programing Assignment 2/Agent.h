@@ -23,6 +23,7 @@ public:
 
 class Agent
 {
+
 public:
 	Agent();
 
@@ -33,22 +34,24 @@ public:
 		this->Damage = damage;
 
 	}
+
 	virtual ~Agent();
+
 
 	virtual void takeDamage(int dam)
 	{
 		HP -= dam;
 	}
 
-	virtual void fight(Agent otherA)
+	virtual void fight(Agent* otherA)
 	{
-		otherA.takeDamage(Damage);
+		otherA->takeDamage(Damage);
 	}
 
 	virtual void displayStats()
 	{
 		cout << Name << ":" << endl;
-		cout << "HP = " << HP << ":" << endl;
+		cout << "HP = " << HP << endl;
 	}
 
 	virtual string getName()
@@ -67,6 +70,12 @@ public:
 			return false;
 		}
 	}
+	virtual void deadMessage()
+	{
+		cout << "---------------------" << endl;
+		cout << getName() << " is Dead" << endl;
+		cout << "---------------------" << endl;
+	}
 
 protected:
 	string Name;
@@ -75,28 +84,39 @@ protected:
 
 class Player : public Agent
 {
+public: 
 	Player(string name, int hp, int damage) : Agent(name, hp, damage)
 	{
 		Name = "Player";
 		HP = 400;
 		Damage = 35;
 	}
-	Player();
-	virtual ~Player();
+	Player() : Agent()
+	{
+		Name = "Player";
+		HP = 400;
+		Damage = 35;
+	}
 
 };
 
 class Kobalt : public  Agent
 {
+public:
 	Kobalt(string name, int hp, int damage) : Agent( name,  hp,  damage)
 	{
 		Name = "Kobalt";
 		HP = 70;
 		Damage = 20;
 	}
-	Kobalt();
-	virtual ~Kobalt();
+	Kobalt(): Agent()
+	{
+		Name = "Kobalt";
+		HP = 70;
+		Damage = 20;
+	}
 
+	
 };
 
 
@@ -116,3 +136,8 @@ class Boss : public  Agent
 
 
 };
+
+inline Agent::~Agent()
+= default;
+
+

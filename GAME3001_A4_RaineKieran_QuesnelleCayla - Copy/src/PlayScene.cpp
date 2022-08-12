@@ -63,7 +63,7 @@ void PlayScene::Update()
 	m_checkAgentLOS(m_pRangedEnemy, m_pRangedEnemy);
 	switch(m_LOSMode)
 	{
-	case LOSMode::TARGET:
+	case LOSMode::SHIP:
 		m_checkaAllNOdesWithTarget(m_pRangedEnemy);
 		break;
 	case LOSMode::BASEENEMY:
@@ -449,7 +449,7 @@ void PlayScene::GUI_Function()
 
 	static int LOS_mode = static_cast<int>(m_LOSMode);
 	ImGui::Text("Path Node LOS");
-	ImGui::RadioButton("Target", &LOS_mode, static_cast<int>(LOSMode::TARGET)); ImGui::SameLine();
+	ImGui::RadioButton("Target", &LOS_mode, static_cast<int>(LOSMode::BASEENEMY)); ImGui::SameLine();
 	ImGui::RadioButton("StarShip", &LOS_mode, static_cast<int>(LOSMode::SHIP)); ImGui::SameLine();
 	ImGui::RadioButton("Both Target & StarShip", &LOS_mode, static_cast<int>(LOSMode::BOTH));
 
