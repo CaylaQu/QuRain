@@ -36,7 +36,7 @@ void PlayScene::Draw()
 			Util::DrawRect(element->GetTransform()->position - offset, element->GetWidth(), element->GetHeight());
 		}
 		auto detected = m_pRangedEnemy->GetTree()->GetPlayerDetectedNode()->GetDetected();
-		Util::DrawCircle(m_pRangedEnemy->GetTransform()->position, 300.0f, detected ? glm::vec4(0, 1, 0, 1) : glm::vec4(1, 0, 0, 1));
+		Util::DrawCircle(m_pRangedEnemy->GetTransform()->position, 90.0f, detected ? glm::vec4(0, 1, 0, 1) : glm::vec4(1, 0, 0, 1));
 	}
 	
 	SDL_SetRenderDrawColor(Renderer::Instance().GetRenderer(), 255, 255, 255, 255);
@@ -54,7 +54,7 @@ void PlayScene::Update()
 	float distance = Util::Distance(m_pRangedEnemy->GetTransform()->position, m_pStarship->GetTransform()->position);
 
 	// Radius detection...just outside of LOS range (around 300 px)
-	m_pRangedEnemy->GetTree()->GetPlayerDetectedNode()->SetDetected(distance < 300);
+	m_pRangedEnemy->GetTree()->GetPlayerDetectedNode()->SetDetected(distance < 90);
 
 	// Within LOS distance...but not too close (optimum firing range)
 	m_pRangedEnemy->GetTree()->GetRangedCombatNode()->SetIsWithinCombatRange(distance >= 200 && distance <= 350);
@@ -367,10 +367,10 @@ void PlayScene::m_clearNodes()
 void PlayScene::Start()
 {
 	// Set GUI Title
-	m_guiTitle = "Assignment 3";
+	m_guiTitle = "Assignment 4";
 
 	// setup a few more fields
-	m_LOSMode = LOSMode::TARGET; // future emu
+	m_LOSMode = LOSMode::SHIP; // future emu
 	m_pathNodeLOSDistance = 1000; // 1000x distance
 	m_setPathNodeLOSDistance(m_pathNodeLOSDistance);
 
@@ -414,6 +414,8 @@ void PlayScene::Start()
 	ImGuiWindowFrame::Instance().SetGuiFunction([this] { GUI_Function(); });
 	SoundManager::Instance().PlayMusic("BackgroundMusic", -1, 0);
 	SoundManager::Instance().SetMusicVolume(3);
+	
+
 }
 
 void PlayScene::GUI_Function()
