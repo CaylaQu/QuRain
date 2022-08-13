@@ -213,7 +213,12 @@ public:
 	{
 		pl2 = p2;
 	}
-
+	bool isValid(int r, int c) {
+		if (r < 0 || c < 0 || r >= maxRows || c >= maxColumns || mapData[r][c] == 1) {
+			return false;
+		}
+		return true;
+	}
 
 
 
@@ -273,14 +278,40 @@ int main()
 	Player* p2l = new Player("Hero", 18, 20, 110, 20, 'b');
 	//Kobalt* k1l = new Kobalt("Monster", 10, 20);
 	/*simulateCombat(p1l, k1l);*/
-	string mapLocation = "C:\\Users\\kiera\\Desktop\\map1.txt";
+	string mapLocation = "C:\\map1.txt";
 	Maplevel level(mapLocation);
 	level.addPlayer1(p1l);
 	level.addPlayer2(p2l);
 	 cout << level.printMap();
 	//Maplevel level;
+	 char dir = _getch();
+	 while (dir != 'E') {
+		 if (dir == 'w' || dir == 'W') {
+			 if (level.isValid(p1l->row - 1, p1l->col)) {
+				 p1l->row = p1l->row - 1;
+			 }
+		 }
+		 if (dir == 'a' || dir == 'A') {
+			 if (level.isValid(p1l->row, p1l->col - 1)) {
+				 p1l->col = p1l->col - 1;
+			 }
+		 }
+		 if (dir == 's' || dir == 'S') {
+			 if (level.isValid(p1l->row + 1, p1l->col)) {
+				 p1l->row = p1l->row + 1;
+			 }
+		 }
+		 if (dir == 'd' || dir == 'D') {
+			 if (level.isValid(p1l->row, p1l->col + 1)) {
+				 p1l->col = p1l->col + 1;
+			 }
+		
+		 }
+		 system("CLS");
+		 cout << level.printMap();
+		 dir = _getch();
+	 }
 	
-
 
 	return 0;
 }
