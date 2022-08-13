@@ -119,14 +119,52 @@ void simulateCombat(Agent* agent1, Agent* agent2)
 
 class Maplevel
 {
+	
+public:
 	int** mapData;
 	int maxRows, maxColumns;
 	Player* pl1;
 	Player* pl2;
 
-public:
-	Maplevel();
-	void MapData(string filename)
+
+	Maplevel(string filename)
+	{
+		ifstream in;
+		in.open(filename.c_str());
+		if (in.is_open())
+		{
+			string line;
+			getline(in, line);
+			stringstream ss(line);
+			in >> maxRows;
+			in >> maxColumns;
+			mapData = new int* [maxRows];
+			for (int x = 0; x < maxRows; x++)
+			{
+				mapData[x] = new int[maxColumns];
+			}
+
+			for (int r = 0; r < maxRows; r++)
+			{
+				getline(in, line);
+				stringstream ss(line);
+				for (int c = 0; c < maxColumns; c++)
+				{
+					ss >> mapData[r][c];
+				}
+			}
+
+
+
+
+
+
+
+		}
+		in.close();
+	}
+	
+	/*void MapData(string filename)
 	{
 		ifstream in;
 		in.open(filename.c_str());
@@ -164,7 +202,7 @@ public:
 
 
 
-	 }
+	 }*/
 	void addPlayer1(Player* p1)
 	{
 		pl1 = p1;
@@ -180,6 +218,7 @@ public:
 
 	string printMap()
 	{
+
 		stringstream ss;
 		 char wallSymbol = (char)176;
 		 for (int r = 0; r < maxRows; r++)
@@ -231,16 +270,18 @@ int main()
 {
 	Player* p1l = new Player("Hero", 18, 20);
 	Kobalt* k1l = new Kobalt("Monster", 10, 20);
-	simulateCombat(p1l, k1l);
-
-	Maplevel level;
+	/*simulateCombat(p1l, k1l);*/
+	string mapLocation = "C:\\Users\\kiera\\Desktop\\QuRain\\Advanced Programing Assignment 2\\Advanced Programing Assignment 2\\map1.txt";
+	Maplevel level(mapLocation);
 	level.addPlayer1(p1l);
 	/*level.addPlayer2(k1l);*/
 
-	string mapLocation("c:\\map1.txt");
-	cout << level.printMap();
+	
+	
+
+	 cout << level.printMap();
 	//Maplevel level;
-	level.MapData(mapLocation);
+	
 
 
 	return 0;
