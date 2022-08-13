@@ -5,6 +5,7 @@
 #include<conio.h>
 #include<stdlib.h>
 #include  <sstream>
+#include <string>
 
 using namespace std;
 
@@ -136,8 +137,8 @@ public:
 			string line;
 			getline(in, line);
 			stringstream ss(line);
-			in >> maxRows;
-			in >> maxColumns;
+			ss >> maxRows;
+			ss >> maxColumns;
 			mapData = new int* [maxRows];
 			for (int x = 0; x < maxRows; x++)
 			{
@@ -228,22 +229,22 @@ public:
 				 if (pl1->row == r && pl1->col == c)
 				 {
 					 ss << pl1->symbol << " ";
-				 }
-				 else 
+				 } else 
 					 if (pl2->row == r && pl2->col == c)
 					 {
 						 ss << pl2->symbol << " ";
 					 }
+					 else {
+						 if (mapData[r][c] == 0)
+						 {
+							 ss << "  ";
+						 }
+						 else
+							 ss << wallSymbol << wallSymbol;
 
-				 if (mapData[r][c] == 0)
-				 {
-					 ss << "  ";
-				 }
-				 else
-					 ss << wallSymbol << wallSymbol;
-
-
+					 }
 			}
+
 			 ss << "\n";
 
 
@@ -269,16 +270,13 @@ public:
 int main()
 {
 	Player* p1l = new Player("Hero", 18, 20);
-	Kobalt* k1l = new Kobalt("Monster", 10, 20);
+	Player* p2l = new Player("Hero1", 18, 20);
+	//Kobalt* k1l = new Kobalt("Monster", 10, 20);
 	/*simulateCombat(p1l, k1l);*/
-	string mapLocation = "C:\\Users\\kiera\\Desktop\\QuRain\\Advanced Programing Assignment 2\\Advanced Programing Assignment 2\\map1.txt";
+	string mapLocation = "C:\\Users\\kiera\\Desktop\\map1.txt";
 	Maplevel level(mapLocation);
 	level.addPlayer1(p1l);
-	/*level.addPlayer2(k1l);*/
-
-	
-	
-
+	level.addPlayer2(p2l);
 	 cout << level.printMap();
 	//Maplevel level;
 	
