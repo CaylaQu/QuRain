@@ -98,8 +98,20 @@ void simulateCombat(Agent* agent1, Agent* agent2)
 
 
 }
-//class Player
+class Player
+{
+public:
+	char symbol;
+	int row, col;
+	Player(int row, int col, char symbol)
+	{
+		this->symbol = symbol;
+		this->row = row;
+		this->col = col;
 
+
+	}
+};
 
 
 
@@ -110,15 +122,18 @@ class Maplevel
 private: 
 	int** mapData;
 	int maxRows, maxColumns;
-
+	Player * pl1, pl2;
 public:
 	Maplevel();
 	void MapData(string filename)
 	{
 		ifstream in;
 		in.open(filename.c_str());
-		if (in.is_open())
+		if (in.is_open()) 
 		{
+			string line;
+			getline(in, line);
+			stringstream ss(line);
 			in >> maxRows;
 			in >> maxColumns;
 			mapData = new int* [maxRows];
@@ -129,9 +144,11 @@ public:
 
 			for (int r = 0; r < maxRows; r++)
 			{
+				getline(in, line);
+				stringstream ss(line);
 				for (int c = 0; c < maxColumns; c++)
 				{
-					in >> mapData[r][c];
+					ss >> mapData[r][c];
 				}
 			}
 
@@ -147,8 +164,20 @@ public:
 
 
 	 }
-	
-	string getMap()
+	void addPlayer1(Player* p1)
+	{
+		pl1 = p1;
+
+	}
+	void addPlayer2(Player* p2)
+	{
+		pl2 = p2;
+	}
+
+
+
+
+	string printMap()
 	{
 		stringstream ss;
 		 char wallSymbol = (char)176;
@@ -156,9 +185,19 @@ public:
 		 {
 			 for (int c = 0; c < maxColumns; c++)
 			 {
+				 if (pl1->row == r && pl1->col == c)
+				 {
+					 ss << pl1->symbol << " ";
+				 }
+				 else 
+					 if (pl2->row == r && pl2->col == c)
+					 {
+						 ss << pl2->symbol << " ";
+					 }
+
 				 if (mapData[r][c] == 0)
 				 {
-					 ss << " ";
+					 ss << "  ";
 				 }
 				 else
 					 ss << wallSymbol << wallSymbol;
@@ -173,7 +212,7 @@ public:
 
 		 }
 
-		 return ss.str;
+		 return ss.str(); 
 	}
 
 
@@ -189,16 +228,18 @@ public:
 
 int main()
 {
-	Player* p1l = new Player("Player", 10, 20);
-	Kobalt* k1l = new Kobalt("Player", 10, 20);
+	Player* p1l = new Player("Hero", 18, 20);
+	Kobalt* k1l = new Kobalt("Monster", 10, 20);
 	simulateCombat(p1l, k1l);
 
-	Player* p1l = new Player(0, 0, 'P');
-	Player* p12 = new Player(18, 0, 'P');
-	
 	Maplevel level;
-	level.MapData("c:\\map1.txt");
-	cout << level.getMap();
+	level.addPlayer1(p1);
+	level.addPlayer2(p2);
+
+	string mapLocation("c:\\map1.txt");
+	cout << level.printMap();
+	Maplevel level(mapLocation);
+
 
 	return 0;
 }
