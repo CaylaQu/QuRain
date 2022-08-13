@@ -127,6 +127,13 @@ public:
 				mapData[x] = new int[maxColumns];
 			}
 
+			for (int r = 0; r < maxRows; r++)
+			{
+				for (int c = 0; c < maxColumns; c++)
+				{
+					in >> mapData[r][c];
+				}
+			}
 
 
 
@@ -186,8 +193,8 @@ int main()
 	Kobalt* k1l = new Kobalt("Player", 10, 20);
 	simulateCombat(p1l, k1l);
 
-	//Player* p1l = new Player(0, 0, 'p');
-	//Player* p12 = new Player(18, 0, 'P');
+	Player* p1l = new Player(0, 0, 'P');
+	Player* p12 = new Player(18, 0, 'P');
 	
 	Maplevel level;
 	level.MapData("c:\\map1.txt");
