@@ -275,7 +275,7 @@ public:
 int main()
 {
 	Player* p1l = new Player("Hero", 18, 20, 10, 10, 'p');
-	Player* p2l = new Player("Hero", 18, 20, 110, 20, 'b');
+	Player* p2l = new Player("Hero", 18, 9, 14, 15, 'b');
 	//Kobalt* k1l = new Kobalt("Monster", 10, 20);
 	/*simulateCombat(p1l, k1l);*/
 	string mapLocation = "C:\\map1.txt";
@@ -284,33 +284,57 @@ int main()
 	level.addPlayer2(p2l);
 	 cout << level.printMap();
 	//Maplevel level;
-	 char dir = _getch();
-	 while (dir != 'E') {
-		 if (dir == 'w' || dir == 'W') {
-			 if (level.isValid(p1l->row - 1, p1l->col)) {
-				 p1l->row = p1l->row - 1;
+
+		 char dir = _getch();
+		 while (dir != 'E') {
+			 if (dir == 'w' || dir == 'W') {
+				 if (level.isValid(p1l->row - 1, p1l->col)) {
+					 p1l->row = p1l->row - 1;
+				 }
 			 }
-		 }
-		 if (dir == 'a' || dir == 'A') {
-			 if (level.isValid(p1l->row, p1l->col - 1)) {
-				 p1l->col = p1l->col - 1;
+			 if (dir == 'a' || dir == 'A') {
+				 if (level.isValid(p1l->row, p1l->col - 1)) {
+					 p1l->col = p1l->col - 1;
+				 }
 			 }
-		 }
-		 if (dir == 's' || dir == 'S') {
-			 if (level.isValid(p1l->row + 1, p1l->col)) {
-				 p1l->row = p1l->row + 1;
+			 if (dir == 's' || dir == 'S') {
+				 if (level.isValid(p1l->row + 1, p1l->col)) {
+					 p1l->row = p1l->row + 1;
+				 }
 			 }
-		 }
-		 if (dir == 'd' || dir == 'D') {
-			 if (level.isValid(p1l->row, p1l->col + 1)) {
-				 p1l->col = p1l->col + 1;
+			 if (dir == 'd' || dir == 'D') {
+				 if (level.isValid(p1l->row, p1l->col + 1)) {
+					 p1l->col = p1l->col + 1;
+				 }
 			 }
-		
+			 //p2l
+			 if (dir == 'i' || dir == 'I') {
+				 if (level.isValid(p2l->row - 1, p2l->col)) {
+					 p2l->row = p2l->row - 1;
+				 }
+			 }
+			 if (dir == 'j' || dir == 'J') {
+				 if (level.isValid(p2l->row, p2l->col - 1)) {
+					 p2l->col = p2l->col - 1;
+				 }
+			 }
+			 if (dir == 'k' || dir == 'K') {
+				 if (level.isValid(p2l->row + 1, p2l->col)) {
+					 p2l->row = p2l->row + 1;
+				 }
+			 }
+			 if (dir == 'l' || dir == 'L') {
+				 if (level.isValid(p2l->row, p2l->col + 1)) {
+					 p2l->col = p2l->col + 1;
+				 }
+			 }
+			 system("CLS");
+			 cout << level.printMap();
+			 dir = _getch();
 		 }
-		 system("CLS");
-		 cout << level.printMap();
-		 dir = _getch();
-	 }
+
+		 
+	 
 	
 
 	return 0;
