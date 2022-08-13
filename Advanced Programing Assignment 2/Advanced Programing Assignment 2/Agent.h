@@ -25,13 +25,18 @@ class Agent
 {
 
 public:
+	char symbol;
+	int row, col;
 	Agent();
 
-	Agent(string name, int hp, int damage)
+	Agent(string name, int hp, int damage, int row, int col, char symbol)
 	{
 		this->Name = name;
 		this->HP = hp;
 		this->Damage = damage;
+		this->row = row;
+		this->col = col;
+		this->symbol = symbol;
 
 	}
 
@@ -87,16 +92,16 @@ class Player : public Agent
 
 	
 public:
-char symbol;
-	int row, col;
 
-	Player(string name, int hp, int damage) : Agent(name, hp, damage)
-	{
-		Name = "Player";
-		HP = 400;
-		Damage = 35;
-	}
-	Player(string name, int hp, int damage, int row, int col, char symbol) : Agent(name, hp, damage)
+
+	//Player(string name, int hp, int damage) :Agent(name, hp, damage, row, col, symbol)
+	//{
+	//{
+	//	Name = "Player";
+	//	HP = 400;
+	//	Damage = 35;
+	//}
+	Player(string name, int hp, int damage, int row, int col, char symbol) : Agent(name, hp, damage,  row,  col,  symbol)
 	{
 		this->symbol = symbol;
 		this->row = row;
@@ -112,7 +117,7 @@ char symbol;
 class Kobalt : public  Agent
 {
 public:
-	Kobalt(string name, int hp, int damage) : Agent( name,  hp,  damage)
+	Kobalt(string name, int hp, int damage, int row, int col, char symbol) : Agent(name, hp, damage, row, col, symbol)
 	{
 		Name = "Kobalt";
 		HP = 70;
@@ -133,7 +138,7 @@ public:
 class Boss : public  Agent
 {
 
-	Boss(string name, int hp, int damage) : Agent(name, hp, damage)
+	Boss(string name, int hp, int damage, int row, int col, char symbol) : Agent(name, hp, damage, row, col, symbol)
 	{
 		Name = "Boss";
 		HP = 600;

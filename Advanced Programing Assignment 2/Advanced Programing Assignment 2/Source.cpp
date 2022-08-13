@@ -124,8 +124,8 @@ class Maplevel
 public:
 	int** mapData;
 	int maxRows, maxColumns;
-	Player* pl1;
-	Player* pl2;
+	Agent* pl1;
+	Agent* pl2;
 
 
 	Maplevel(string filename)
@@ -204,12 +204,12 @@ public:
 
 
 	 }*/
-	void addPlayer1(Player* p1)
+	void addPlayer1(Agent* p1)
 	{
 		pl1 = p1;
 
 	}
-	void addPlayer2(Player* p2)
+	void addPlayer2(Agent* p2)
 	{
 		pl2 = p2;
 	}
@@ -269,8 +269,8 @@ public:
 
 int main()
 {
-	Player* p1l = new Player("Hero", 18, 20);
-	Player* p2l = new Player("Hero1", 18, 20);
+	Player* p1l = new Player("Hero", 18, 20, 10, 10, 'p');
+	Player* p2l = new Player("Hero", 18, 20, 110, 20, 'b');
 	//Kobalt* k1l = new Kobalt("Monster", 10, 20);
 	/*simulateCombat(p1l, k1l);*/
 	string mapLocation = "C:\\Users\\kiera\\Desktop\\map1.txt";
