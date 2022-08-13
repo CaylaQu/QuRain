@@ -1,9 +1,4 @@
 ﻿  Source.cpp
-<<<<<<< Updated upstream
-C:\Users\cayla\Desktop\QuRain\Advanced Programing Assignment 2\Advanced Programing Assignment 2\Source.cpp(15,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  Advanced Programing Assignment 2.vcxproj -> C:\Users\cayla\Desktop\QuRain\Advanced Programing Assignment 2\x64\Debug\Advanced Programing Assignment 2.exe
-=======
-C:\Users\DjKz2\source\repos\QuRain\Advanced Programing Assignment 2\Advanced Programing Assignment 2\Source.cpp(14,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-Source.obj : error LNK2019: unresolved external symbol "public: virtual __cdecl Agent::~Agent(void)" (??1Agent@@UEAA@XZ) referenced in function "public: virtual void * __cdecl Agent::`scalar deleting destructor'(unsigned int)" (??_GAgent@@UEAAPEAXI@Z)
-C:\Users\DjKz2\source\repos\QuRain\Advanced Programing Assignment 2\x64\Debug\Advanced Programing Assignment 2.exe : fatal error LNK1120: 1 unresolved externals
->>>>>>> Stashed changes
+C:\Users\kiera\Desktop\QuRain\Advanced Programing Assignment 2\Advanced Programing Assignment 2\Source.cpp(15,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+Source.obj : error LNK2019: unresolved external symbol "public: __cdecl Maplevel::Maplevel(void)" (??0Maplevel@@QEAA@XZ) referenced in function main
+C:\Users\kiera\Desktop\QuRain\Advanced Programing Assignment 2\x64\Debug\Advanced Programing Assignment 2.exe : fatal error LNK1120: 1 unresolved externals

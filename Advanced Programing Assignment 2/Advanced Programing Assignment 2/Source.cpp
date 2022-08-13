@@ -98,20 +98,20 @@ void simulateCombat(Agent* agent1, Agent* agent2)
 
 
 }
-class Player
-{
-public:
-	char symbol;
-	int row, col;
-	Player(int row, int col, char symbol)
-	{
-		this->symbol = symbol;
-		this->row = row;
-		this->col = col;
-
-
-	}
-};
+//class Player
+//{
+//public:
+//	char symbol;
+//	int row, col;
+//	Player(int row, int col, char symbol)
+//	{
+//		this->symbol = symbol;
+//		this->row = row;
+//		this->col = col;
+//
+//
+//	}
+//};
 
 
 
@@ -119,10 +119,11 @@ public:
 
 class Maplevel
 {
-private: 
 	int** mapData;
 	int maxRows, maxColumns;
-	Player * pl1, pl2;
+	Player* pl1;
+	Player* pl2;
+
 public:
 	Maplevel();
 	void MapData(string filename)
@@ -233,12 +234,13 @@ int main()
 	simulateCombat(p1l, k1l);
 
 	Maplevel level;
-	level.addPlayer1(p1);
-	level.addPlayer2(p2);
+	level.addPlayer1(p1l);
+	/*level.addPlayer2(k1l);*/
 
 	string mapLocation("c:\\map1.txt");
 	cout << level.printMap();
-	Maplevel level(mapLocation);
+	//Maplevel level;
+	level.MapData(mapLocation);
 
 
 	return 0;

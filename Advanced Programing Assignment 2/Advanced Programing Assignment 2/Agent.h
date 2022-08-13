@@ -84,15 +84,24 @@ protected:
 
 class Player : public Agent
 {
-public: 
+
+	
+public:
+char symbol;
+	int row, col;
+
 	Player(string name, int hp, int damage) : Agent(name, hp, damage)
 	{
 		Name = "Player";
 		HP = 400;
 		Damage = 35;
 	}
-	Player() : Agent()
+	Player(string name, int hp, int damage, int row, int col, char symbol) : Agent(name, hp, damage)
 	{
+		this->symbol = symbol;
+		this->row = row;
+		this->col = col;
+
 		Name = "Player";
 		HP = 400;
 		Damage = 35;
