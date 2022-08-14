@@ -1,0 +1,14 @@
+#pragma once
+#ifndef __RANGED_ENEMY_ANIMATION_STATE__
+#define __RANGED_ENEMY_ANIMATION_STATE__
+
+enum class RangedEnemyAnimationState
+{
+	RANGED_IDLE,
+	RANGED_ENEMY_RUN_RIGHT,
+	RANGED_ENEMY_RUN_LEFT,
+	RANGED_ENEMY_FIRE,
+	NUM_OF_ANIMATION_STATES
+};
+
+#endif

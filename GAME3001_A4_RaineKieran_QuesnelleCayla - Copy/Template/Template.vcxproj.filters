@@ -499,6 +499,12 @@
     <ClInclude Include="..\src\TreeNodeType.h">
       <Filter>Enums</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\RangedEnemyAnimationState.h">
+      <Filter>Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\CloseCombatEnemyAnimationStates.h">
+      <Filter>Enums</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.md">

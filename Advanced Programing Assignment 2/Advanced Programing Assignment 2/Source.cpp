@@ -99,23 +99,6 @@ void simulateCombat(Agent* agent1, Agent* agent2)
 
 
 }
-//class Player
-//{
-//public:
-//	char symbol;
-//	int row, col;
-//	Player(int row, int col, char symbol)
-//	{
-//		this->symbol = symbol;
-//		this->row = row;
-//		this->col = col;
-//
-//
-//	}
-//};
-
-
-
 
 
 class Maplevel
@@ -164,46 +147,7 @@ public:
 		}
 		in.close();
 	}
-	
-	/*void MapData(string filename)
-	{
-		ifstream in;
-		in.open(filename.c_str());
-		if (in.is_open()) 
-		{
-			string line;
-			getline(in, line);
-			stringstream ss(line);
-			in >> maxRows;
-			in >> maxColumns;
-			mapData = new int* [maxRows];
-			for (int x = 0; x < maxRows; x++)
-			{
-				mapData[x] = new int[maxColumns];
-			}
 
-			for (int r = 0; r < maxRows; r++)
-			{
-				getline(in, line);
-				stringstream ss(line);
-				for (int c = 0; c < maxColumns; c++)
-				{
-					ss >> mapData[r][c];
-				}
-			}
-
-
-
-
-
-
-
-		}
-		in.close();
-
-
-
-	 }*/
 	void addPlayer1(Agent* p1)
 	{
 		pl1 = p1;
@@ -276,14 +220,14 @@ int main()
 {
 	Player* p1l = new Player("Hero", 18, 20, 10, 10, 'p');
 	Player* p2l = new Player("Hero", 18, 9, 14, 15, 'b');
-	//Kobalt* k1l = new Kobalt("Monster", 10, 20);
-	/*simulateCombat(p1l, k1l);*/
+	Kobalt* k1l = new Kobalt("Monster", 10, 20);
+	simulateCombat(p1l, k1l);
 	string mapLocation = "C:\\map1.txt";
 	Maplevel level(mapLocation);
 	level.addPlayer1(p1l);
 	level.addPlayer2(p2l);
 	 cout << level.printMap();
-	//Maplevel level;
+	
 
 		 char dir = _getch();
 		 while (dir != 'E') {
