@@ -12,7 +12,7 @@
 #include "TiledLevel.h"
 #include "RangedCombatEnemy.h"
 #include "CloseCombatEnemy.h"
-
+#include "EnemyBullet.h"
 
 
 
@@ -28,6 +28,10 @@ public:
 	virtual void Clean() override;
 	virtual void HandleEvents() override;
 	virtual void Start() override;
+	Target* GetTarget() const;
+	void SpawnEnemyBullet();
+
+
 private:
 	// IMGUI Function
 	void GUI_Function();
@@ -45,6 +49,7 @@ private:
 	Target* m_pTarget;
 	Starship* m_pStarship;
 	RangedCombatEnemy* m_pRangedEnemy;
+	std::vector<EnemyBullet*> m_pEnemyBullet;
 	std::vector<Obstacle*> m_pObstacles;
 	TiledLevel* m_pLevel;
 

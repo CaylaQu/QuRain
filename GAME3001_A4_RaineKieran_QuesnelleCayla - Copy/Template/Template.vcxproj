@@ -170,6 +170,7 @@
     <ClCompile Include="..\src\CloseCombatEnemy.cpp" />
     <ClCompile Include="..\src\CollisionManager.cpp" />
     <ClCompile Include="..\src\DecisionTree.cpp" />
+    <ClCompile Include="..\src\EnemyBullet.cpp" />
     <ClCompile Include="..\src\EnemyHealthCondition.cpp" />
     <ClCompile Include="..\src\EnemyHitCondition.cpp" />
     <ClCompile Include="..\src\FleeAction.cpp" />
@@ -241,6 +242,8 @@
     <ClInclude Include="..\src\ConditionNode.h" />
     <ClInclude Include="..\src\Config.h" />
     <ClInclude Include="..\src\DecisionTree.h" />
+    <ClInclude Include="..\src\EnemyBullet.h" />
+    <ClInclude Include="..\src\EnemyBulletAnimationState.h" />
     <ClInclude Include="..\src\EnemyHealthCondition.h" />
     <ClInclude Include="..\src\EnemyHitCondition.h" />
     <ClInclude Include="..\src\FleeAction.h" />

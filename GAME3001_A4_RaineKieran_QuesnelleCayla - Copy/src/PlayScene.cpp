@@ -28,9 +28,9 @@ void PlayScene::Draw()
 {
 
 	DrawDisplayList();
-	if(m_isGridEnabled)
+	if (m_isGridEnabled)
 	{
-		for(auto element : m_pObstacles)
+		for (auto element : m_pObstacles)
 		{
 			auto offset = glm::vec2(element->GetWidth() * 0.5, element->GetHeight() * 0.5);
 			Util::DrawRect(element->GetTransform()->position - offset, element->GetWidth(), element->GetHeight());
@@ -38,7 +38,7 @@ void PlayScene::Draw()
 		auto detected = m_pRangedEnemy->GetTree()->GetPlayerDetectedNode()->GetDetected();
 		Util::DrawCircle(m_pRangedEnemy->GetTransform()->position, 90.0f, detected ? glm::vec4(0, 1, 0, 1) : glm::vec4(1, 0, 0, 1));
 	}
-	
+
 	SDL_SetRenderDrawColor(Renderer::Instance().GetRenderer(), 255, 255, 255, 255);
 }
 
@@ -61,7 +61,7 @@ void PlayScene::Update()
 
 
 	m_checkAgentLOS(m_pRangedEnemy, m_pRangedEnemy);
-	switch(m_LOSMode)
+	switch (m_LOSMode)
 	{
 	case LOSMode::SHIP:
 		m_checkaAllNOdesWithTarget(m_pRangedEnemy);
@@ -104,15 +104,15 @@ void PlayScene::GetPlayerInput()
 				constexpr auto dead_zone = 10000;
 				if (EventManager::Instance().GetGameController(0)->STICK_LEFT_HORIZONTAL > dead_zone)
 				{
-					
+
 				}
 				else if (EventManager::Instance().GetGameController(0)->STICK_LEFT_HORIZONTAL < -dead_zone)
 				{
-					
+
 				}
 				else
 				{
-					
+
 				}
 			}
 		}
@@ -139,11 +139,11 @@ void PlayScene::GetPlayerInput()
 		}
 		if (EventManager::Instance().IsKeyDown(SDL_SCANCODE_H))
 		{
-			
+
 		}
 		else
 		{
-			
+
 		}
 	}
 	break;
@@ -157,26 +157,26 @@ void PlayScene::GetPlayerInput()
 				if (EventManager::Instance().GetGameController(0)->STICK_LEFT_HORIZONTAL > dead_zone
 					|| EventManager::Instance().IsKeyDown(SDL_SCANCODE_D))
 				{
-					
+
 				}
 				else if (EventManager::Instance().GetGameController(0)->STICK_LEFT_HORIZONTAL < -dead_zone
 					|| EventManager::Instance().IsKeyDown(SDL_SCANCODE_A))
 				{
-					
+
 				}
 				else
 				{
-					
+
 				}
 			}
 		}
 		else if (EventManager::Instance().IsKeyDown(SDL_SCANCODE_A))
 		{
-		
+
 		}
 		else if (EventManager::Instance().IsKeyDown(SDL_SCANCODE_D))
 		{
-			
+
 		}
 		else if (EventManager::Instance().IsKeyDown(SDL_SCANCODE_W))
 		{
@@ -188,7 +188,7 @@ void PlayScene::GetPlayerInput()
 		}
 		else
 		{
-			
+
 		}
 	}
 	break;
@@ -239,7 +239,7 @@ void PlayScene::m_buildGrid()
 	//m_ClearNodes(); // we will need to clear nodes every time we move an obstacle
 
 	// lay out a grid of path_nodes
-	for(int row = 0; row < Config::ROW_NUM; ++row)
+	for (int row = 0; row < Config::ROW_NUM; ++row)
 	{
 		for (int col = 0; col < Config::COL_NUM; ++col)
 		{
@@ -247,9 +247,9 @@ void PlayScene::m_buildGrid()
 			path_node->GetTransform()->position = glm::vec2(static_cast<float>(col) * tile_size + offset.x, static_cast<float>(row) * tile_size + offset.y);
 
 			bool keep_node = true;
-			for(auto obstacle : m_pObstacles)
+			for (auto obstacle : m_pObstacles)
 			{
-				if(CollisionManager::AABBCheck(path_node, obstacle))
+				if (CollisionManager::AABBCheck(path_node, obstacle))
 				{
 					keep_node = false;
 				}
@@ -275,7 +275,7 @@ void PlayScene::m_buildGrid()
 
 void PlayScene::m_toggleGrid(bool state)
 {
-	for(auto path_node : m_pGrid)
+	for (auto path_node : m_pGrid)
 	{
 		path_node->SetVisible(state);
 	}
@@ -295,11 +295,11 @@ bool PlayScene::m_checkAgentLOS(Agent* agent, DisplayObject* target_objects)
 		std::vector<DisplayObject*> contact_list;
 		for (auto display_object : GetDisplayList())
 		{
-			if (display_object->GetType() == GameObjectType::NONE) { continue;  }
+			if (display_object->GetType() == GameObjectType::NONE) { continue; }
 
 			const auto agent_to_object_distance = Util::GetClosestEdge(agent->GetTransform()->position, display_object);
 			if (agent_to_object_distance > agent_to_range) { continue; } // target is out of range
-			if((display_object->GetType() != GameObjectType::AGENT) && (display_object->GetType() != GameObjectType::PATH_NODE) && (display_object->GetType() != GameObjectType::TARGET))
+			if ((display_object->GetType() != GameObjectType::AGENT) && (display_object->GetType() != GameObjectType::PATH_NODE) && (display_object->GetType() != GameObjectType::TARGET))
 			{
 				contact_list.push_back(display_object);
 			}
@@ -343,7 +343,7 @@ void PlayScene::m_checkAllNNodesWithBoth()
 
 void PlayScene::m_setPathNodeLOSDistance(const int dist)
 {
-	for(const auto path_node : m_pGrid)
+	for (const auto path_node : m_pGrid)
 	{
 		path_node->SetLOSDistance(static_cast<float>(dist));
 	}
@@ -353,9 +353,9 @@ void PlayScene::m_setPathNodeLOSDistance(const int dist)
 void PlayScene::m_clearNodes()
 {
 	m_pGrid.clear();
-	for(auto display_object : GetDisplayList())
+	for (auto display_object : GetDisplayList())
 	{
-		if(display_object->GetType() == GameObjectType::PATH_NODE)
+		if (display_object->GetType() == GameObjectType::PATH_NODE)
 		{
 			RemoveChild(display_object);
 		}
@@ -398,7 +398,7 @@ void PlayScene::Start()
 	m_pRangedEnemy->GetTransform()->position = glm::vec2(400.0f, 40.0f);
 	AddChild(m_pRangedEnemy, 2);
 
-	
+
 
 
 	// setup the grid
@@ -414,8 +414,23 @@ void PlayScene::Start()
 	ImGuiWindowFrame::Instance().SetGuiFunction([this] { GUI_Function(); });
 	SoundManager::Instance().PlayMusic("BackgroundMusic", -1, 0);
 	SoundManager::Instance().SetMusicVolume(3);
-	
 
+
+}
+
+Target* PlayScene::GetTarget() const
+{
+	return m_pTarget;
+}
+
+void PlayScene::SpawnEnemyBullet()
+{
+	glm::vec2 Spawn_point = m_pStarship->GetTransform()->position + m_pStarship->GetCurrentDirection() * 30.0f;
+	glm::vec2 enemy_bullet_direction = Util::Normalize(m_pTarget->GetTransform()->position - Spawn_point);
+
+	m_pEnemyBullet.push_back(new EnemyBullet(5.0f, enemy_bullet_direction));
+	m_pEnemyBullet.back()->GetTransform()->position = Spawn_point;
+	AddChild(m_pEnemyBullet.back(), 2);
 }
 
 void PlayScene::GUI_Function()
@@ -460,7 +475,7 @@ void PlayScene::GUI_Function()
 
 	// spaceship properties
 
-	static int shipPosition[] = { static_cast<int>(m_pRangedEnemy->GetTransform()->position.x), static_cast<int>(m_pRangedEnemy->GetTransform()->position.y)};
+	static int shipPosition[] = { static_cast<int>(m_pRangedEnemy->GetTransform()->position.x), static_cast<int>(m_pRangedEnemy->GetTransform()->position.y) };
 	if (ImGui::SliderInt2("Enemy Position", shipPosition, 0, 800))
 	{
 		m_pRangedEnemy->GetTransform()->position.x = static_cast<float>(shipPosition[0]);
@@ -476,7 +491,7 @@ void PlayScene::GUI_Function()
 
 	// Target properties
 
-	static int targetPosition[] = { static_cast<int>( m_pTarget->GetTransform()->position.x), static_cast<int>(m_pTarget->GetTransform()->position.y) };
+	static int targetPosition[] = { static_cast<int>(m_pTarget->GetTransform()->position.x), static_cast<int>(m_pTarget->GetTransform()->position.y) };
 	if (ImGui::SliderInt2("Target Position", targetPosition, 0, 800))
 	{
 		m_pTarget->GetTransform()->position.x = static_cast<float>(targetPosition[0]);
@@ -500,6 +515,6 @@ void PlayScene::GUI_Function()
 
 	ImGui::Separator();
 
-	
+
 	ImGui::End();
 }

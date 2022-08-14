@@ -174,7 +174,6 @@
     <ClCompile Include="..\src\PathManager.cpp">
       <Filter>Managers</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\BaseEnemy.cpp" />
     <ClCompile Include="..\src\AttackAction.cpp">
       <Filter>Decisions\Actions</Filter>
     </ClCompile>
@@ -234,6 +233,12 @@
     </ClCompile>
     <ClCompile Include="..\src\DecisionTree.cpp">
       <Filter>Decisions\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\EnemyBullet.cpp">
+      <Filter>Game Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\BaseEnemy.cpp">
+      <Filter>Decisions\Agents</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -423,7 +428,6 @@
     <ClInclude Include="..\src\PathManager.h">
       <Filter>Managers</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\BaseEnemy.h" />
     <ClInclude Include="..\src\AttackAction.h">
       <Filter>Decisions\Actions</Filter>
     </ClInclude>
@@ -504,6 +508,15 @@
     </ClInclude>
     <ClInclude Include="..\src\CloseCombatEnemyAnimationStates.h">
       <Filter>Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\EnemyBullet.h">
+      <Filter>Game Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\EnemyBulletAnimationState.h">
+      <Filter>Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\BaseEnemy.h">
+      <Filter>Decisions\Agents</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
