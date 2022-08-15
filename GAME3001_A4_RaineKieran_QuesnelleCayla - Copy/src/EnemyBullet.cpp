@@ -42,13 +42,15 @@ void EnemyBullet::Draw()
 
 void EnemyBullet::Update()
 {
+	GetTransform()->position += m_direction;
+
 }
 
 void EnemyBullet::Clean()
 {
 }
 
-void EnemyBullet::SetAnimationState(EnemyBulletAnimationState newstate)
+void EnemyBullet::SetAnimationState(const EnemyBulletAnimationState newstate)
 {
 	m_currentAnimationState = newstate;
 

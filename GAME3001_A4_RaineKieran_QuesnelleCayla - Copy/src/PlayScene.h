@@ -29,6 +29,7 @@ public:
 	virtual void HandleEvents() override;
 	virtual void Start() override;
 	Target* GetTarget() const;
+	RangedCombatEnemy* GetRangedEnemy() const;
 	void SpawnEnemyBullet();
 
 

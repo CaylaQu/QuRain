@@ -36,7 +36,7 @@ void PlayScene::Draw()
 			Util::DrawRect(element->GetTransform()->position - offset, element->GetWidth(), element->GetHeight());
 		}
 		auto detected = m_pRangedEnemy->GetTree()->GetPlayerDetectedNode()->GetDetected();
-		Util::DrawCircle(m_pRangedEnemy->GetTransform()->position, 90.0f, detected ? glm::vec4(0, 1, 0, 1) : glm::vec4(1, 0, 0, 1));
+		Util::DrawCircle(m_pRangedEnemy->GetTransform()->position, 250.0f, detected ? glm::vec4(0, 1, 0, 1) : glm::vec4(1, 0, 0, 1));
 	}
 
 	SDL_SetRenderDrawColor(Renderer::Instance().GetRenderer(), 255, 255, 255, 255);
@@ -54,7 +54,7 @@ void PlayScene::Update()
 	float distance = Util::Distance(m_pRangedEnemy->GetTransform()->position, m_pStarship->GetTransform()->position);
 
 	// Radius detection...just outside of LOS range (around 300 px)
-	m_pRangedEnemy->GetTree()->GetPlayerDetectedNode()->SetDetected(distance < 90);
+	m_pRangedEnemy->GetTree()->GetPlayerDetectedNode()->SetDetected(distance < 250);
 
 	// Within LOS distance...but not too close (optimum firing range)
 	m_pRangedEnemy->GetTree()->GetRangedCombatNode()->SetIsWithinCombatRange(distance >= 200 && distance <= 350);
@@ -423,10 +423,15 @@ Target* PlayScene::GetTarget() const
 	return m_pTarget;
 }
 
+RangedCombatEnemy* PlayScene::GetRangedEnemy() const
+{
+	return m_pRangedEnemy;
+}
+
 void PlayScene::SpawnEnemyBullet()
 {
-	glm::vec2 Spawn_point = m_pStarship->GetTransform()->position + m_pStarship->GetCurrentDirection() * 30.0f;
-	glm::vec2 enemy_bullet_direction = Util::Normalize(m_pTarget->GetTransform()->position - Spawn_point);
+	glm::vec2 Spawn_point = m_pRangedEnemy->GetTransform()->position + m_pRangedEnemy->GetCurrentDirection() * 30.0f;
+	glm::vec2 enemy_bullet_direction = Util::Normalize(m_pStarship->GetTransform()->position - Spawn_point);
 
 	m_pEnemyBullet.push_back(new EnemyBullet(5.0f, enemy_bullet_direction));
 	m_pEnemyBullet.back()->GetTransform()->position = Spawn_point;

@@ -228,7 +228,7 @@ void RangedCombatEnemy::Flee()
 	{
 		SetActionState(ActionState::FLEE);
 	}
-	//Flee();
+	
 }
 
 void RangedCombatEnemy::MoveToLOS()
@@ -238,16 +238,23 @@ void RangedCombatEnemy::MoveToLOS()
 		SetActionState(ActionState::MOVE_TO_LOS);
 	}
 
-	// MoveToLOS Algorithm
+	
 }
 
 void RangedCombatEnemy::MoveToRange()
 {
+	auto scene = dynamic_cast<PlayScene*>(m_pScene);
+
 	if (GetActionState() != ActionState::MOVE_TO_RANGE)
 	{
 		SetActionState(ActionState::MOVE_TO_RANGE);
 	}
 	// MoveToRange Algorithm
+
+	glm::vec2 target_direction = Util::Normalize(scene->GetRangedEnemy()->GetTransform()->position - GetTransform()->position);
+	LookWhereIAmGoing(target_direction);
+	//Move();
+
 }
 
 void RangedCombatEnemy::MoveToCover()
@@ -281,13 +288,13 @@ void RangedCombatEnemy::Attack()
 	// Attack Action Algorithm
 
 
-	/*glm::vec2 target_direction = Util::Normalize(scene->GetTarget()->GetTransform()->position - GetTransform()->position);
+	glm::vec2 target_direction = Util::Normalize(scene->GetRangedEnemy()->GetTransform()->position - GetTransform()->position);
 	LookWhereIAmGoing(target_direction);
 
 	if(m_fireCounter++ % m_fireCounterMax == 0)
 	{
-		scene->SpawnEnemyTorpedo();
-	}*/
+		scene->SpawnEnemyBullet();
+	}
 
 }
 

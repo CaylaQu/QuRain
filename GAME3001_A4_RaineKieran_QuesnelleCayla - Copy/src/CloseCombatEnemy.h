@@ -2,10 +2,10 @@
 #ifndef __CLOSE_COMBAT_ENEMY__
 #define __CLOSE_COMBAT_ENEMY__
 
-#include "Agent.h"
+#include "BaseEnemy.h"
 #include "DecisionTree.h"
 
-class CloseCombatEnemy final : public Agent
+class CloseCombatEnemy final : public BaseEnemy
 {
 public:
 	CloseCombatEnemy();
