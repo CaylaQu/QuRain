@@ -31,7 +31,7 @@ public:
 	Target* GetTarget() const;
 	RangedCombatEnemy* GetRangedEnemy() const;
 	void SpawnEnemyBullet();
-
+	Starship* GetStarShip();
 
 private:
 	// IMGUI Function

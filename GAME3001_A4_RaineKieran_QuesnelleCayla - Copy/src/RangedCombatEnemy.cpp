@@ -29,8 +29,8 @@ RangedCombatEnemy::RangedCombatEnemy(Scene* scene) : m_maxSpeed(20.0f),
 	SetCurrentHeading(0.0f); // current facing angle
 	SetCurrentDirection(glm::vec2(1.0f, 0.0f)); // facing right
 
-	SetLOSDistance(400.0f);
-	SetLOSColour(glm::vec4(1, 0, 0, 1)); // default LOS colour is Red
+	SetLOSDistance(150.0f);
+	SetLOSColour(glm::vec4(0, 1, 0, 1)); // default LOS colour is Red
 	
 	SetType(GameObjectType::AGENT);
 
@@ -233,12 +233,22 @@ void RangedCombatEnemy::Flee()
 
 void RangedCombatEnemy::MoveToLOS()
 {
+		auto scene = dynamic_cast<PlayScene*>(m_pScene);
+
 	if (GetActionState() != ActionState::MOVE_TO_LOS)
 	{
 		SetActionState(ActionState::MOVE_TO_LOS);
 	}
+	//SetTargetPosition(scene->GetStarShip()->GetTransform()->position);
 
-	
+	//SetDesiredVelocity(GetTargetPosition());
+
+	//const glm::vec2 steering_direction = GetDesiredVelocity() - GetCurrentDirection();
+
+	//LookWhereIAmGoing(steering_direction);
+
+	//GetRigidBody()->acceleration = GetCurrentDirection() * GetAccelerationRate();
+	//
 }
 
 void RangedCombatEnemy::MoveToRange()
@@ -251,9 +261,10 @@ void RangedCombatEnemy::MoveToRange()
 	}
 	// MoveToRange Algorithm
 
+
 	glm::vec2 target_direction = Util::Normalize(scene->GetRangedEnemy()->GetTransform()->position - GetTransform()->position);
 	LookWhereIAmGoing(target_direction);
-	//Move();
+	Move();
 
 }
 
